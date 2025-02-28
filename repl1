@@ -1,0 +1,168 @@
+racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
+It's been nice interacting with you!
+Press C-c C-z to bring me back.
+Welcome to Racket v8.15 [cs].
+racket@> (require "uv/tensor.rkt")
+uv/tensor.rkt:134:30: i: unbound identifier
+  in: i
+  location...:
+   uv/tensor.rkt:134:30
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/tensor.rkt")
+racket@> (require "uv/tensor.rkt")
+racket@> (define t1 #(#(1 2) #(4 5)))
+racket@> (uv/md-reduce + t1 1)
+9
+racket@> (uv/md-reduce + t1 1)
+9
+racket@> (require "uv/tensor.rkt")
+racket@> (vector-reduce + #(3 4))
+vector-reduce: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define vector-reduce
+  (lambda (f xs)
+    (do ((i 1 (+ i 1))
+         (a (vector-ref xs 0) (f (vector-ref xs i) a)))
+        ((= i (vector-length xs)) a))))
+
+racket@> (vector-reduce + #(3 4))
+7
+racket@> (define uv/md-reduce
+  (lambda (f t acc)
+    (if (number? (vector-ref t 0))
+        (vector-reduce f t)
+        (do ((i 0 (+ 1 i))
+             (a (uv/md-reduce
+                 f (vector-ref t 0) acc)
+                (f (uv/md-reduce f (vector-ref t i) a))))
+            ((= i (vector-length t)) a)))))
+
+racket@> (uv/md-reduce + t1 1)
+9
+racket@> (define uv/md-reduce
+  (lambda (f t acc)
+    (if (number? (vector-ref t 0))
+        (vector-reduce f t)
+        (do ((i 0 (+ 1 i))
+             (a (uv/md-reduce
+                 f (vector-ref t 0) acc)
+                (f (uv/md-reduce f (vector-ref t i) a))))
+            ((= i (vector-length t)) a)
+          (displayln a)))))
+
+racket@> (uv/md-reduce + t1 1)
+3
+3
+9
+racket@> (define uv/md-reduce
+  (lambda (f t acc)
+    (if (number? (vector-ref t 0))
+        (f (vector-reduce f t) acc)
+        (do ((i 1 (+ 1 i))
+             (a (uv/md-reduce
+                 f (vector-ref t 0) acc)
+                (f (uv/md-reduce f (vector-ref t i) a))))
+            ((= i (vector-length t)) a)
+          (displayln a)))))
+
+racket@> (uv/md-reduce + t1 0)
+3
+12
+racket@> t1
+'#(#(1 2) #(4 5))
+racket@> (uv/md-reduce (lambda (x y) (if (x < y) (x) (y))))
+uv/md-reduce: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 3
+  given: 1
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/md-reduce (lambda (x y) (if (x < y) (x) (y))) t1 1000)
+application: not a procedure;
+ expected a procedure that can be applied to arguments
+  given: 2
+  context...:
+   body of top-level
+   stdin::248869
+   stdin::132252: vector-reduce
+   stdin::221904: uv/md-reduce
+   [repeats 1 more time]
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/md-reduce min t1 1000)
+application: not a procedure;
+ expected a procedure that can be applied to arguments
+  given: 1
+  context...:
+   body of top-level
+   stdin::132252: vector-reduce
+   stdin::221904: uv/md-reduce
+   [repeats 1 more time]
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (min 3 4)
+3
+racket@> (uv/md-reduce min t1 1000)
+1
+1
+racket@> (uv/md-reduce max t1 1000)
+1000
+1000
+racket@> (random 3)
+0
+racket@> (random 100)
+14
+racket@> (shape t1)
+shape: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define shape
+  (λ (t)
+    (cond
+     ((scalar? t) (list))
+     (else (cons (length t) (shape (car t)))))))
+
+racket@> (shape t1)
+scalar?: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   stdin::714367: shape
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define scalar? number?)
+
+racket@> (shape t1)
+length: contract violation
+  expected: list?
+  given: '#(#(1 2) #(4 5))
+  context...:
+   stdin::714367: body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define-struct coord (x y))
+racket@> (define c (make-coord 10 30))
+racket@> c
+#<coord>
+racket@> (coord-x c)
+10
+racket@> (set! (coord-x c) 222)
+stdin::912810: set!: not an identifier
+  at: (coord-x c)
+  in: (set! (coord-x c) 222)
+  location...:
+   stdin::912810
+  context...:
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (struct? c)
+#f
+racket@> (coord? c)
+#t
+racket@> 
