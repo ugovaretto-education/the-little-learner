@@ -14,7 +14,7 @@
 
 (define fformat
   (lambda (f decimal-digits)
-    (let* ((xs (string-split (number->string f) "."))
+    (let ((xs (string-split (number->string f) ".")))
       (if (empty? (cdr xs))
           (car xs)
           (format "~a.~a"

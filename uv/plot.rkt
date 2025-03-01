@@ -5,7 +5,7 @@
 
 (require "vector.rkt" "calculus.rkt")
 
-(require plot string-interpolation)
+(require plot)
 
 
 (define scatter-plot
