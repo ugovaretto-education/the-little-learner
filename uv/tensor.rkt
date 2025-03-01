@@ -67,7 +67,7 @@
 (define uv/tensor-foldl
   (lambda (ts f acc)
     (match ts
-        ((list h) (uv/tensor-bin-op f h acc))
+        ((list h) (uv/tensor-bin-op f acc h))
         (_ (uv/tensor-foldl (cdr ts) f (uv/tensor-bin-op f acc (car ts)))))))
 
 (define uv/tensor-fold

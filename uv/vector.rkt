@@ -4,10 +4,10 @@
 
 (provide vector-reduce
          reduce-vectors
-         reduce-multi-vectors
          v+
          v-
          vectors-reduce
+         vector-foldl
          vsum
          vmin
          vmax)
@@ -33,25 +33,29 @@
        (else
         (apply-element (cdr vs) i f (f (vector-ref (car vs) i) acc))))))
 
-(define reduce-multi-vectors
-  (lambda (vs f)
-    (do ((i 0 (+ i 1))
-         (f (symbol->function f))
-         (zs (make-vector (vector-length (car vs)) 0.0)))
-        ((= i (vector-length zs)) zs)
-      (vector-set! zs i
-                   (apply-element (cdr vs) i f (vector-ref (car vs) 0))))))
+(define vector-foldl
+  (lambda (f vs acc)
+    (if (empty? vs)
+        acc
+        (vector-foldl f (cdr vs) (reduce-vectors acc (car vs) f)))))
+  ;; (lambda (vs f)
+  ;;   (do ((i 0 (+ i 1))
+  ;;        (f (symbol->function f))
+  ;;        (zs (make-vector (vector-length (car vs)) 0.0)))
+  ;;       ((= i (vector-length zs)) zs)
+  ;;     (vector-set! zs i
+  ;;                  (apply-element (cdr vs) i f (vector-ref (car vs) 0))))))
 
 (define (v+ . args)
-  (reduce-multi-vectors args +))
+  (vector-foldl + (cdr args) (car args)))
 
 (define (v- . args)
-  (reduce-multi-vectors args -))
+  (vector-foldl - (cdr args) (car args)))
 
 
 ;; call as (vectors-reduce )
 (define (vectors-reduce  . args)
-  (reduce-multi-vectors (cdr args) (car args)))
+  (vector-foldl (car args) (cddr args) (cadr args)))
 
 (define vsum
   (λ (t)

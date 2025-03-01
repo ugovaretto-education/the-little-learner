@@ -2,167 +2,729 @@ racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
 It's been nice interacting with you!
 Press C-c C-z to bring me back.
 Welcome to Racket v8.15 [cs].
+racket@> (require "tensor.rkt")
+open-input-file: cannot open input file
+  path: /Users/ugo/projects/ugovaretto-education/the-little-learner/tensor.rkt
+  system error: No such file or directory; errno=2
+  context...:
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:34:0: read-one
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
 racket@> (require "uv/tensor.rkt")
-uv/tensor.rkt:134:30: i: unbound identifier
-  in: i
+load-handler: expected a `module` declaration in #<path:/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/vector.rkt>, but found something else
+  context...:
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   [repeats 1 more time]
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/tensor.rkt")
+load-handler: expected a `module` declaration in #<path:/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/tensor.rkt>, but found something else
+  context...:
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/tensor.rkt")
+load-handler: expected a `module` declaration in #<path:/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/tensor.rkt>, but found something else
+  context...:
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (pwd)
+pwd: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/calculus.rkt")
+load-handler: expected a `module` declaration in #<path:/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/calculus.rkt>, but found something else
+  context...:
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/tensor.rkt")
+load-handler: expected a `module` declaration in #<path:/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/tensor.rkt>, but found something else
+  context...:
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/tensor.rkt")
+uv/tensor.rkt:2:0: module: not a module path
+  at: (provide uv/rank uv/shape uv/make-tensor uv/tensor-ref uv/tensor-set! uv/tensor-fold uv/tensor-mfold uv/md-reduce uv/tensor-kernel uv/tensor-bin-op uv/tensor-map uv/build-tensor)
+  in: (module uv/tensor (provide uv/rank uv/shape uv/make-tensor uv/tensor-ref uv/tensor-set! uv/tensor-fold uv/tensor-mfold uv/md-reduce uv/tensor-kernel uv/tensor-bin-op uv/tensor-map uv/build-tensor) (require "vector.rkt" "utility.rkt") (define uv/rank (λ ...
   location...:
-   uv/tensor.rkt:134:30
+   uv/tensor.rkt:2:0
   context...:
    /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
 racket@> (require "uv/tensor.rkt")
+load-handler: expected a `module` declaration in #<path:/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/tensor.rkt>, but found something else
+  context...:
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
 racket@> (require "uv/tensor.rkt")
-racket@> (define t1 #(#(1 2) #(4 5)))
-racket@> (uv/md-reduce + t1 1)
-9
-racket@> (uv/md-reduce + t1 1)
-9
+load-handler: expected a `module` declaration in #<path:/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/tensor.rkt>, but found something else
+  context...:
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@>   context...:  M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
+It's been nice interacting with you!
+Press C-c C-z to bring me back.
+Welcome to Racket v8.15 [cs].
+racket@> (require "uv/plot.rkt")
+load-handler: expected a `module` declaration in #<path:/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/plot.rkt>, but found something else
+  context...:
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
 racket@> (require "uv/tensor.rkt")
-racket@> (vector-reduce + #(3 4))
-vector-reduce: undefined;
+uv/utility.rkt:4:9: provide: provided identifier is not defined or required
+  at: scalar
+  in: (provide symbol->function scalar)
+  location...:
+   uv/utility.rkt:4:9
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   [repeats 2 more times]
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/tensor.rkt")
+uv/tensor.rkt:32:12: rank: unbound identifier
+  in: rank
+  location...:
+   uv/tensor.rkt:32:12
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/tensor.rkt")
+uv/tensor.rkt:125:33: tensor-map: unbound identifier
+  in: tensor-map
+  location...:
+   uv/tensor.rkt:125:33
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/tensor.rkt")
+uv/tensor.rkt:129:10: let: bad syntax (not an identifier and expression for a binding)
+  at: (io uv/make-tensor shape)
+  in: (let ((io uv/make-tensor shape)) (uv/tensor-kernel io io (lambda (coord _) (generator coord))))
+  location...:
+   uv/tensor.rkt:129:10
+  context...:
+   /Applications/Racket v8.15/collects/racket/private/qq-and-or.rkt:101:61: loop
+   /Applications/Racket v8.15/collects/racket/private/qq-and-or.rkt:50:20: go
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/tensor.rkt")
+uv/tensor.rkt:4:9: provide: provided identifier is not defined or required
+  at: uv/shape
+  in: (provide uv/rank uv/shape uv/make-tensor uv/tensor-ref uv/tensor-set! uv/tensor-fold uv/tensor-mfold uv/md-reduce uv/tensor-kernel uv/tensor-bin-op uv/tensor-map uv/build-tensor)
+  location...:
+   uv/tensor.rkt:4:9
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/tensor.rkt")
+racket@> (require string-interpolation)
+stdin::524142: collection not found
+  for module path: string-interpolation
+  collection: "string-interpolation"
+  in collection directories:
+   /Users/ugo/projects/ugovaretto-education/the-little-learner
+   /Users/ugo/Library/Racket/8.15/collects
+   /Applications/Racket v8.15/collects/
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src
+   ... [170 additional linked and package directories]
+  location...:
+   stdin::524142
+  context...:
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define out (open-output-string))
+racket@> (write "this is " out)
+racket@> out
+#<output-port:string>
+racket@> (close-output-port out)
+racket@> out
+#<output-port:string>
+racket@> (get-output-string out)
+"\"this is \""
+racket@> (define o (printf "width1: |~6a|~6a|\n" 12 345)))
+printf: ill-formed pattern string
+  explanation: tag `~6` not allowed; arguments were: 12 345
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> stdin::566740: read-syntax: unexpected `)`
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/user.rkt:89:0
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (printf "width1: |~6,2|~6,5|\n" 12.4567 345.456789)
+printf: ill-formed pattern string
+  explanation: tag `~6` not allowed; arguments were: 12.4567 345.456789
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (printf "width3: |~-6,2f|~-6,2f|\n" 1.2 3.45)
+printf: ill-formed pattern string
+  explanation: tag `~-` not allowed; arguments were: 1.2 3.45
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (printf "~f" 3.4)
+printf: ill-formed pattern string
+  explanation: tag `~f` not allowed; arguments were: 3.4
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (printf "~s" 3.4)
+3.4racket@> 
+racket@> (format "~s" 3.4)
+"3.4"
+racket@> (format "~f" 3.4)
+format: ill-formed pattern string
+  explanation: tag `~f` not allowed; arguments were: 3.4
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require racket/format)
+racket@> (format "~f" 3.4)
+format: ill-formed pattern string
+  explanation: tag `~f` not allowed; arguments were: 3.4
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (printf "~f" 3.4)
+printf: ill-formed pattern string
+  explanation: tag `~f` not allowed; arguments were: 3.4
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require racket/format)
+racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
+It's been nice interacting with you!
+Press C-c C-z to bring me back.
+Welcome to Racket v8.15 [cs].
+racket@> (require racket/format)
+racket@> (format "~f" 3.4)
+format: ill-formed pattern string
+  explanation: tag `~f` not allowed; arguments were: 3.4
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (format "~x" (flbit-field 3.141579e+132 16 48))
+flbit-field: undefined;
  cannot reference an identifier before its definition
   in module: top-level
   context...:
    body of top-level
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (define vector-reduce
-  (lambda (f xs)
-    (do ((i 1 (+ i 1))
-         (a (vector-ref xs 0) (f (vector-ref xs i) a)))
-        ((= i (vector-length xs)) a))))
-
-racket@> (vector-reduce + #(3 4))
-7
-racket@> (define uv/md-reduce
-  (lambda (f t acc)
-    (if (number? (vector-ref t 0))
-        (vector-reduce f t)
-        (do ((i 0 (+ 1 i))
-             (a (uv/md-reduce
-                 f (vector-ref t 0) acc)
-                (f (uv/md-reduce f (vector-ref t i) a))))
-            ((= i (vector-length t)) a)))))
-
-racket@> (uv/md-reduce + t1 1)
-9
-racket@> (define uv/md-reduce
-  (lambda (f t acc)
-    (if (number? (vector-ref t 0))
-        (vector-reduce f t)
-        (do ((i 0 (+ 1 i))
-             (a (uv/md-reduce
-                 f (vector-ref t 0) acc)
-                (f (uv/md-reduce f (vector-ref t i) a))))
-            ((= i (vector-length t)) a)
-          (displayln a)))))
-
-racket@> (uv/md-reduce + t1 1)
-3
-3
-9
-racket@> (define uv/md-reduce
-  (lambda (f t acc)
-    (if (number? (vector-ref t 0))
-        (f (vector-reduce f t) acc)
-        (do ((i 1 (+ 1 i))
-             (a (uv/md-reduce
-                 f (vector-ref t 0) acc)
-                (f (uv/md-reduce f (vector-ref t i) a))))
-            ((= i (vector-length t)) a)
-          (displayln a)))))
-
-racket@> (uv/md-reduce + t1 0)
-3
-12
-racket@> t1
-'#(#(1 2) #(4 5))
-racket@> (uv/md-reduce (lambda (x y) (if (x < y) (x) (y))))
-uv/md-reduce: arity mismatch;
- the expected number of arguments does not match the given number
-  expected: 3
-  given: 1
+racket@> (number->string 1234.12345678)
+"1234.12345678"
+racket@> (take 2 '(1 2 3 4)))
+take: contract violation
+  expected: exact-nonnegative-integer?
+  given: '(1 2 3 4)
+  argument position: 2nd
+  other arguments...:
+   2
   context...:
    body of top-level
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (uv/md-reduce (lambda (x y) (if (x < y) (x) (y))) t1 1000)
+racket@> stdin::52665: read-syntax: unexpected `)`
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/user.rkt:89:0
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (take '(1 2 34 56) 2)
+'(1 2)
+racket@> (string-split "234.556" \#.)
+#.: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (string-split "234.556" #\.)
+string-split: contract violation
+  expected: (or/c string? regexp?)
+  given: #\.
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/private/more-scheme.rkt:377:2: hash-ref!
+   /Applications/Racket v8.15/collects/racket/string.rkt:162:0: string-split
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (string-split "234.556" ".")
+'("234" "556")
+racket@> (string-split "556" ".")
+'("556")
+racket@> (cdr ("ff"))
 application: not a procedure;
  expected a procedure that can be applied to arguments
+  given: "ff"
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (cdr '("ff"))
+'()
+racket@> (define ff)
+stdin::90565: define: bad syntax (missing expression after identifier)
+  in: (define ff)
+  location...:
+   stdin::90565
+  context...:
+   /Applications/Racket v8.15/collects/racket/private/norm-define.rkt:165:4: normalize-definition
+   /Applications/Racket v8.15/collects/racket/private/kw.rkt:1169:2
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define ff
+           (lambda (f n)
+             (let ((xs (split-string (number->string f) ".")))
+               (if (empty? (cdr xs)) 
+                   (car xs)
+                   (format "~s.~s" (car xs (take xs n)))))))
+racket@> (ff 3.4556 2)
+split-string: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   stdin::178177: ff
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define ff
+           (lambda (f n)
+             (let ((xs (string-split (number->string f) ".")))
+               (if (empty? (cdr xs)) 
+                   (car xs)
+                   (format "~s.~s" (car xs (take xs n)))))))
+racket@> (ff 3.4556 2)
+car: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
   given: 2
   context...:
-   body of top-level
-   stdin::248869
-   stdin::132252: vector-reduce
-   stdin::221904: uv/md-reduce
-   [repeats 1 more time]
+   stdin::205497: body of top-level
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (uv/md-reduce min t1 1000)
-application: not a procedure;
- expected a procedure that can be applied to arguments
-  given: 1
+racket@> (define ff
+           (lambda (f n)
+             (let ((xs (string-split (number->string f) ".")))
+               (if (empty? (cdr xs)) 
+                   (car xs)
+                   (format "~s.~s" (car xs) (take xs n))))))
+racket@> (ff 3.4556 2)
+"\"3\".(\"3\" \"4556\")"
+racket@> (define ff
+           (lambda (f n)
+             (let ((xs (string-split (number->string f) ".")))
+               (if (empty? (cdr xs)) 
+                   (car xs)
+                   (format "~a.~a" (car xs) (take xs n))))))
+racket@> (ff 3.4556 2)
+"3.(3 4556)"
+racket@> (define ff
+           (lambda (f n)
+             (let ((xs (string-split (number->string f) ".")))
+               (if (empty? (cdr xs)) 
+                   (car xs)
+                   (format "~a.~a" (car xs) (string- xs n))))))
+racket@> (string->list "abc")
+'(#\a #\b #\c)
+racket@> (list->string (string->list "abc"))
+"abc"
+racket@> (define ff
+           (lambda (f n)
+             (let ((xs (string-split (number->string f) ".")))
+               (if (empty? (cdr xs)) 
+                   (car xs)
+                   (format "~s.~s" 
+                           (car xs) 
+                           (list->string (take (string->list (cdr xs)) n)))))))
+racket@> (ff 3.4556 2)
+string->list: contract violation
+  expected: string?
+  given: '("4556")
   context...:
-   body of top-level
-   stdin::132252: vector-reduce
-   stdin::221904: uv/md-reduce
-   [repeats 1 more time]
+   stdin::349530: body of top-level
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (min 3 4)
-3
-racket@> (uv/md-reduce min t1 1000)
-1
-1
-racket@> (uv/md-reduce max t1 1000)
-1000
-1000
-racket@> (random 3)
-0
-racket@> (random 100)
-14
-racket@> (shape t1)
-shape: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
+racket@> (cdr (string-split "345.456"))
+'()
+racket@> (cdr (string-split "345.456" "."))
+'("456")
+racket@> (define ff
+           (lambda (f n)
+             (let ((xs (string-split (number->string f) ".")))
+               (if (empty? (cdr xs)) 
+                   (car xs)
+                   (format "~s.~s" 
+                           (car xs) 
+                           (list->string (take (string->list (cadr xs)) n)))))))
+racket@> (ff 3.4556 2)
+"\"3\".\"45\""
+racket@> (define ff
+           (lambda (f n)
+             (let ((xs (string-split (number->string f) ".")))
+               (if (empty? (cdr xs)) 
+                   (car xs)
+                   (format "~a.~a" 
+                           (car xs) 
+                           (list->string (take (string->list (cadr xs)) n)))))))
+racket@> (ff 3.4556 2)
+"3.45"
+racket@> (define xs (build-vector 10 (lambda (x) (+ (* 2 (/ x 2)) 0.4))))
+racket@> xs
+'#(0.4 1.4 2.4 3.4 4.4 5.4 6.4 7.4 8.4 9.4)
+racket@> (require "uv/plot.rkt")
+uv/utility.rkt:15:0: read-syntax: expected a `)` to close `(`
   context...:
-   body of top-level
+   /Applications/Racket v8.15/collects/syntax/module-reader.rkt:214:17: body
+   /Applications/Racket v8.15/collects/syntax/module-reader.rkt:211:2: wrap-internal
+   /Applications/Racket v8.15/collects/racket/../syntax/module-reader.rkt:76:9: wrap-internal/wrapper
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   [repeats 2 more times]
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (define shape
-  (λ (t)
-    (cond
-     ((scalar? t) (list))
-     (else (cons (length t) (shape (car t)))))))
-
-racket@> (shape t1)
-scalar?: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   stdin::714367: shape
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (define scalar? number?)
-
-racket@> (shape t1)
-length: contract violation
-  expected: list?
-  given: '#(#(1 2) #(4 5))
-  context...:
-   stdin::714367: body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (define-struct coord (x y))
-racket@> (define c (make-coord 10 30))
-racket@> c
-#<coord>
-racket@> (coord-x c)
-10
-racket@> (set! (coord-x c) 222)
-stdin::912810: set!: not an identifier
-  at: (coord-x c)
-  in: (set! (coord-x c) 222)
+racket@> (require "uv/plot.rkt")
+uv/utility.rkt:17:4: let*: bad syntax (missing body)
+  in: (let* ((xs (string-split (number->string f) ".")) (if (empty? (cdr xs)) (car xs) (format "~a.~a" (car xs) (list->string (take (string->list (cadr xs)) decimal-digits))))))
   location...:
-   stdin::912810
+   uv/utility.rkt:17:4
   context...:
+   /Applications/Racket v8.15/collects/racket/private/qq-and-or.rkt:50:20: go
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   [repeats 2 more times]
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (struct? c)
-#f
-racket@> (coord? c)
-#t
+racket@> (require "uv/plot.rkt")
+uv/utility.rkt:17:4: let: bad syntax (missing binding pairs or body)
+  in: (let ((xs (string-split (number->string f) ".")) (if (empty? (cdr xs)) (car xs) (format "~a.~a" (car xs) (list->string (take (string->list (cadr xs)) decimal-digits))))))
+  location...:
+   uv/utility.rkt:17:4
+  context...:
+   /Applications/Racket v8.15/collects/racket/private/qq-and-or.rkt:50:20: go
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   [repeats 2 more times]
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define ff
+           (lambda (f n)
+             (let ((xs (string-split (number->string f) ".")))
+               (if (empty? (cdr xs)) 
+                   (car xs)
+                   (format "~a.~a" 
+                           (car xs) 
+                           (list->string (take (string->list (cadr xs)) n)))))))
+racket@> (ff 3.4556 2)
+"3.45"
+racket@> (define xs (build-vector 10 (lambda (x) (+ (* 2 (/ x 2)) 0.4))))
+racket@> xs
+'#(0.4 1.4 2.4 3.4 4.4 5.4 6.4 7.4 8.4 9.4)
+racket@> (require "uv/plot.rkt")
+uv/utility.rkt:15:0: read-syntax: expected a `)` to close `(`
+  context...:
+   /Applications/Racket v8.15/collects/syntax/module-reader.rkt:214:17: body
+   /Applications/Racket v8.15/collects/syntax/module-reader.rkt:211:2: wrap-internal
+   /Applications/Racket v8.15/collects/racket/../syntax/module-reader.rkt:76:9: wrap-internal/wrapper
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   [repeats 2 more times]
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/plot.rkt")
+uv/utility.rkt:17:4: let*: bad syntax (missing body)
+  in: (let* ((xs (string-split (number->string f) ".")) (if (empty? (cdr xs)) (car xs) (format "~a.~a" (car xs) (list->string (take (string->list (cadr xs)) decimal-digits))))))
+  location...:
+   uv/utility.rkt:17:4
+  context...:
+   /Applications/Racket v8.15/collects/racket/private/qq-and-or.rkt:50:20: go
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   [repeats 2 more times]
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/plot.rkt")
+uv/utility.rkt:17:4: let: bad syntax (missing binding pairs or body)
+  in: (let ((xs (string-split (number->string f) ".")) (if (empty? (cdr xs)) (car xs) (format "~a.~a" (car xs) (list->string (take (string->list (cadr xs)) decimal-digits))))))
+  location...:
+   uv/utility.rkt:17:4
+  context...:
+   /Applications/Racket v8.15/collects/racket/private/qq-and-or.rkt:50:20: go
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   [repeats 2 more times]
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> 
+racket@> racket@>: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> "3.45"
+racket@> "3.45"
+racket@> racket@>: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> racket@> racket@>: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> '#(0.4 1.4 2.4 3.4 4.4 5.4 6.4 7.4 8.4 9.4)
+racket@> '#(0.4 1.4 2.4 3.4 4.4 5.4 6.4 7.4 8.4 9.4)
+racket@> racket@>: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> uv/utility.rkt:17:4: let: bad syntax (missing binding pairs or body)
+  in: (let ((xs (string-split (number->string f) ".")) (if (empty? (cdr xs)) (car xs) (format "~a.~a" (car xs) (list->string (take (string->list (cadr xs)) decimal-digits))))))
+  location...:
+   uv/utility.rkt:17:4
+  context...:
+   /Applications/Racket v8.15/collects/racket/private/qq-and-or.rkt:50:20: go
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   [repeats 2 more times]
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> uv/utility.rkt:15:0:: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> read-syntax:: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> expected: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> a: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> stdin::562285: read-syntax: unexpected `)`
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/user.rkt:89:0
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> 'to
+racket@> close: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define fformat
+  (lambda (f decimal-digits)
+    (let ((xs (string-split (number->string f) "."))
+      (if (empty? (cdr xs))
+          (car xs)
+          (format "~a.~a"
+                  (car xs)
+                  (list->string
+                   (take (string->list (cadr xs)) decimal-digits)))))))))
+geiser-no-values: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> 
+racket@> 
+racket@> 
+racket@> (define fformat
+  (lambda (f decimal-digits)
+    (let ((xs (string-split (number->string f) "."))
+      (if (empty? (cdr xs))
+          (car xs)
+          (format "~a.~a"
+                  (car xs)
+                  (list->string
+                   (take (string->list (cadr xs)) decimal-digits))))))))
+
+stdin::565380: let: bad syntax (missing binding pairs or body)
+  in: (let ((xs (string-split (number->string f) ".")) (if (empty? (cdr xs)) (car xs) (format "~a.~a" (car xs) (list->string (take (string->list (cadr xs)) decimal-digits))))))
+  location...:
+   stdin::565380
+  context...:
+   /Applications/Racket v8.15/collects/racket/private/qq-and-or.rkt:50:20: go
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define ff
+           (lambda (f n)
+             (let ((xs (string-split (number->string f) ".")))
+               (if (empty? (cdr xs)) 
+                   (car xs)
+                   (format "~a.~a" 
+                           (car xs) 
+                           (list->string (take (string->list (cadr xs)) n)))))))
+racket@> (ff 3.4556 2)
+"3.45"
+racket@> (define xs (build-vector 10 (lambda (x) (+ (* 2 (/ x 2)) 0.4))))
+racket@> xs
+'#(0.4 1.4 2.4 3.4 4.4 5.4 6.4 7.4 8.4 9.4)
+racket@> (require "uv/plot.rkt")
+uv/utility.rkt:15:0: read-syntax: expected a `)` to close `(`
+  context...:
+   /Applications/Racket v8.15/collects/syntax/module-reader.rkt:214:17: body
+   /Applications/Racket v8.15/collects/syntax/module-reader.rkt:211:2: wrap-internal
+   /Applications/Racket v8.15/collects/racket/../syntax/module-reader.rkt:76:9: wrap-internal/wrapper
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   [repeats 2 more times]
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/plot.rkt")
+uv/utility.rkt:17:4: let*: bad syntax (missing body)
+  in: (let* ((xs (string-split (number->string f) ".")) (if (empty? (cdr xs)) (car xs) (format "~a.~a" (car xs) (list->string (take (string->list (cadr xs)) decimal-digits))))))
+  location...:
+   uv/utility.rkt:17:4
+  context...:
+   /Applications/Racket v8.15/collects/racket/private/qq-and-or.rkt:50:20: go
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   [repeats 2 more times]
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/plot.rkt")
+uv/utility.rkt:17:4: let: bad syntax (missing binding pairs or body)
+  in: (let ((xs (string-split (number->string f) ".")) (if (empty? (cdr xs)) (car xs) (format "~a.~a" (car xs) (list->string (take (string->list (cadr xs)) decimal-digits))))))
+  location...:
+   uv/utility.rkt:17:4
+  context...:
+   /Applications/Racket v8.15/collects/racket/private/qq-and-or.rkt:50:20: go
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   [repeats 2 more times]
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> 
+racket@> racket@>: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> "3.45"
+racket@> "3.45"
+racket@> racket@>: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> racket@> racket@>: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> '#(0.4 1.4 2.4 3.4 4.4 5.4 6.4 7.4 8.4 9.4)
+racket@> '#(0.4 1.4 2.4 3.4 4.4 5.4 6.4 7.4 8.4 9.4)
+racket@> racket@>: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> uv/utility.rkt:23:71: read-syntax: unexpected `)`
+  context...:
+   /Applications/Racket v8.15/collects/syntax/module-reader.rkt:214:17: body
+   /Applications/Racket v8.15/collects/syntax/module-reader.rkt:211:2: wrap-internal
+   /Applications/Racket v8.15/collects/racket/../syntax/module-reader.rkt:76:9: wrap-internal/wrapper
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   [repeats 2 more times]
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> uv/utility.rkt:15:0:: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> read-syntax:: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> expected: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> a: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> stdin::569103: read-syntax: unexpected `)`
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/user.rkt:89:0
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> 'to
+racket@> close: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> 
+
+
+
+user break
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/user.rkt:89:0
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> user break
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/user.rkt:89:0
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "u "  M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
+It's been nice interacting with you!
+Press C-c C-z to bring me back.
+Welcome to Racket v8.15 [cs].
+racket@> (require "uv/plot.rkt")
+uv/utility.rkt:23:71: read-syntax: unexpected `)`
+  context...:
+   /Applications/Racket v8.15/collects/syntax/module-reader.rkt:214:17: body
+   /Applications/Racket v8.15/collects/syntax/module-reader.rkt:211:2: wrap-internal
+   /Applications/Racket v8.15/collects/racket/../syntax/module-reader.rkt:76:9: wrap-internal/wrapper
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   [repeats 2 more times]
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/plot.rkt")
+uv/plot.rkt:8:14: collection not found
+  for module path: string-interpolation
+  collection: "string-interpolation"
+  in collection directories:
+   /Users/ugo/projects/ugovaretto-education/the-little-learner
+   /Users/ugo/Library/Racket/8.15/collects
+   /Applications/Racket v8.15/collects/
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src
+   ... [170 additional linked and package directories]
+  location...:
+   uv/plot.rkt:8:14
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/plot.rkt")
+racket@> (define xs #(0 1 2 3 4 5))
+racket@> (line-plot xs '(0.2 0.1) 'green)
+[image]
 racket@> 

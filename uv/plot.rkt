@@ -37,6 +37,27 @@
              xmax
              #:color color)))))
 
+
+(define line-scatter-plot
+  (lambda (xs ys theta color-p color-l)
+    (let ((xm (- (vmin xs) 0.1))
+          (xM (+ (vmax xs) 0.1))
+          (ym (- (vmin ys) 0.1))
+          (yM (+ (vmax ys) 0.1)))
+      (plot (list
+       (points
+        (vector-map vector xs ys)
+        #:color color-p
+        #:x-min xm
+        #:x-max xM
+        #:y-min ym
+        #:y-max yM)
+       (function
+        (uv/line-eq theta)
+        xm
+        xM
+        #:color color-l))))))
+
 ;; (require plot)
 ;; (plot (function (line-eq '(0.5 -1)) (- 2) 2 #:label "y = line-eq(x)"))
 ;; applicaiton x -> y: (vector-map (line-eq 0.5 1) #(1 2 3 4))

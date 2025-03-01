@@ -35,4 +35,4 @@
         (let ((pred-ys ((target-fun xs) params)))
           (vsum
            (uv/sqr
-            (v- ys pred-ys))))))))
+            (v- pred-ys ys))))))))
