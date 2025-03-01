@@ -1,11 +1,11 @@
-(require plot)
-(define vmin
-  (λ (v)
-    (vector-argmin (λ (x) x) v)))
+#lang racket
 
-(define vmax
-  (λ (v)
-    (vector-argmax (λ (x) x) v)))
+(provide scatter-plot
+         line-plot)
+
+(require "vector.rkt" "calculus.rkt")
+
+(require plot string-interpolation)
 
 
 (define scatter-plot
@@ -25,4 +25,25 @@
       #:x-max xM
       #:y-min ym
       #:y-max yM
-    )))))
+      )))))
+
+(define line-plot
+  (lambda (xs theta color)
+    (let ((xmin (- (vmin xs) 0.1))
+          (xmax (+ (vmax xs) 0.1)))
+      (plot (function
+             (uv/line-eq theta)
+             xmin
+             xmax
+             #:color color)))))
+
+;; (require plot)
+;; (plot (function (line-eq '(0.5 -1)) (- 2) 2 #:label "y = line-eq(x)"))
+;; applicaiton x -> y: (vector-map (line-eq 0.5 1) #(1 2 3 4))
+;; Theta: θ 003B8
+
+;; (require plot)
+;; (define xs '(0 1 2 3 4 5))
+;; (define ys '(0 1 4 9 16 25))
+;; (plot (points (map vector xs ys) #:color 'red))
+;; use vector-map if xs ys are vectors
