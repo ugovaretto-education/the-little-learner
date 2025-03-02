@@ -3,7 +3,9 @@
 (provide uv/sqr
          uv/line
          uv/l2-loss
-         uv/line-eq)
+         uv/line-eq
+         uv/loss-line
+         uv/loss-line-m)
 
 (require "tensor.rkt"
          "utility.rkt"
@@ -36,3 +38,14 @@
           (vsum
            (uv/sqr
             (v- pred-ys ys))))))))
+
+(define uv/loss-line
+  (lambda (xs ys)
+    (lambda (theta)
+    (((uv/l2-loss uv/line) xs ys) theta))))
+
+
+(define uv/loss-line-m ;; y = mx + q, q = 0
+  (lambda (xs ys)
+    (lambda (m)
+           ((uv/loss-line xs ys) (list m 0)))))
