@@ -6,6 +6,7 @@
          reduce-vectors
          v+
          v-
+         v*
          vectors-reduce
          vector-foldl
          vsum
@@ -52,6 +53,11 @@
 (define (v- . args)
   (vector-foldl - (cdr args) (car args)))
 
+(define (v* . args)
+  (if (scalar? (car args))
+      (vector-foldl * (cdr args)
+                    (make-vector (vector-length (cadr args)) (car args)))
+      (vector-foldl * (cdr args) (car args))))
 
 ;; call as (vectors-reduce )
 (define (vectors-reduce  . args)
