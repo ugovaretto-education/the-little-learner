@@ -23,12 +23,26 @@
         (uv/tensor-map sqr xs))))
 
 
-(define uv/line-eq
+(define line-eq-l
   (λ (θ)
     (λ (x)
       (+
        (* (car θ) x)
        (cadr θ)))))
+
+(define line-eq-v
+  (λ (θ)
+    (λ (x)
+      (+
+       (* (vector-ref θ 0) x)
+       (vector-ref θ 1)))))
+
+(define uv/line-eq
+  (lambda (xs)
+    (cond
+     ((list? xs) (line-eq-l xs))
+     ((vector? xs) (line-eq-v xs))
+     (else "error only list or vector supported"))))
 
 (define uv/line
   (lambda (xs)
@@ -55,7 +69,6 @@
     (lambda (m)
            ((uv/loss-line xs ys) (list m 0)))))
 
-(defne vector-)
 
 (define uv/gradient
   (lambda (f)
@@ -74,9 +87,11 @@
             (vector-set! dxs- i x-)
             (vector-set! gs i
                          (/ (-
-                             (apply f (vector->list dxs+))
-                             (apply f (vector->list dxs-)))
-                            dx))
+                             (f dxs+) ;; call with (f <vector>)
+                             (f dxs-)) ;; call with (f <vector>)
+             ;;                (apply f (vector->list dxs+)) ;; call with (f x y ...)
+             ;;                (apply f (vector->list dxs-)));; call with (f x y ...)
+                            dx)))
             gs))))))
 
 (define uv/normalize

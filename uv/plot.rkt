@@ -1,7 +1,8 @@
 #lang racket
 
 (provide scatter-plot
-         line-plot)
+         line-plot
+         line-scatter-plot)
 
 (require "vector.rkt" "calculus.rkt")
 
@@ -39,7 +40,7 @@
 
 
 (define line-scatter-plot
-  (lambda (xs ys theta color-p color-l)
+  (lambda (xs ys theta color-p color-l (label ""))
     (let ((xm (- (vmin xs) 0.1))
           (xM (+ (vmax xs) 0.1))
           (ym (- (vmin ys) 0.1))
@@ -57,7 +58,8 @@
          (uv/line-eq theta)
          xm
          xM
-         #:color color-l))))))
+         #:color color-l
+         #:label label))))))
 
 ;; (require plot)
 ;; (plot (function (line-eq '(0.5 -1)) (- 2) 2 #:label "y = line-eq(x)"))

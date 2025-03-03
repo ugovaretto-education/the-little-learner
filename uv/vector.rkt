@@ -11,7 +11,17 @@
          vector-foldl
          vsum
          vmin
-         vmax)
+         vmax
+         to-vector)
+
+(define to-vector
+  (lambda (x)
+    (cond
+      ((scalar? x) (vector x))
+      ((vector? x) x)
+      ((list? x) (list->vector x))
+      (else (error "to-vector: only scalar, list or vector supported"))
+    )))
 
 (define vector-reduce
   (lambda (f xs)

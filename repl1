@@ -1421,4 +1421,1040 @@ racket@> (plot-loss-weights line-xs line-ys weights 'blue 'orange)
 [image]
 racket@> (plot-loss-weights line-xs line-ys weights 'blue 'orange)
 [image]
+racket@> (require malt)
+"settings="
+'#hash((tensor-implementation . (learner)))
+racket@> epsilon
+1e-8
+racket@> (gradient-of sqr 0)
+0.0
+racket@> (gradient-of sqr 1.4)
+2.8
+racket@> (gradient-of (lambda (x y) (* 2 x y)) '(5 6))
+arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 2
+  given: 1
+  context...:
+   /Users/ugo/Library/Racket/8.15/pkgs/malt/learner/autodiff/A-autodiff.rkt:10:2: body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (gradient-of (lambda (x y) (* 2 x y)) 5 6)
+∇: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 2
+  given: 3
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (gradient-of (lambda (x y) (* 2 x y)) '((2 3)))
+arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 2
+  given: 1
+  context...:
+   /Users/ugo/Library/Racket/8.15/pkgs/malt/learner/autodiff/A-autodiff.rkt:10:2: body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (gradient-of (lambda (x y) (* 2 x y)) #(2 3))
+arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 2
+  given: 1
+  context...:
+   /Users/ugo/Library/Racket/8.15/pkgs/malt/learner/autodiff/A-autodiff.rkt:10:2: body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (vector-copy #(3 4 4))
+(tensor 3 4 4)
+racket@> (define xs' '(44 44))
+racket@> xs'
+''(44 44)
+racket@> (require "uv/calculus.rkt")
+racket@> (do ((i 0 (+ 1 i))))
+stdin::1847800: do: bad syntax
+  in: (do ((i 0 (+ 1 i))))
+  location...:
+   stdin::1847800
+  context...:
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (do ((i 0 (+ 1 i))
+              (j (* 2 i)))
+             ((= i 4))
+           (displayln j))
+i: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (do ((i 0 (+ 1 i))
+              (j 0 (* 2 i)))
+             ((= i 4))
+           (displayln j))
+0
+0
+2
+4
+racket@> (do ((i 0 (+ 1 i))
+              (j 0 i)
+             ((= i 4)))
+           (displayln j))
+         
+stdin::1863069: do: bad syntax
+  in: (do ((i 0 (+ 1 i)) (j 0 i) ((= i 4))) (displayln j))
+  location...:
+   stdin::1863069
+  context...:
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (do ((i 0 (+ 1 i))
+              (j 0 (i))
+((= i 4)))
+           (displayln j))
+         
+stdin::1863857: do: bad syntax
+  in: (do ((i 0 (+ 1 i)) (j 0 (i)) ((= i 4))) (displayln j))
+  location...:
+   stdin::1863857
+  context...:
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (do ((i 0 (+ 1 i))
+              (j 0 (* 1 i)))
+             ((= i 4))
+           (displayln j))
+0
+0
+1
+2
+racket@> (do ((i 0 (+ 1 i))
+              (j 0 (* 1 i)))
+             ((= i 4))
+           (displayln i))
+0
+1
+2
+3
+racket@> (do ((i 0 (+ 1 i))
+              (j i (* 1 i)))
+             ((= i 4))
+           (displayln j))
+i: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (do ((i 0 (+ 1 i))
+              (j (+ i 4) (* 1 i)))
+             ((= i 4))
+           (displayln j))
+i: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (do ((i 0 (+ 1 i))
+              (j _ (* 1 i)))
+             ((= i 4))
+           (displayln j))
+stdin::1898989: _: wildcard not allowed as an expression
+  in: _
+  location...:
+   stdin::1898989
+  context...:
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define v #(4 5))
+racket@> (vector-set! v 1 55)
+vector-set!: contract violation
+  expected: (and/c vector? (not/c immutable?))
+  given: (tensor 4 5)
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (vector-set! v 0 55)
+vector-set!: contract violation
+  expected: (and/c vector? (not/c immutable?))
+  given: (tensor 4 5)
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
+It's been nice interacting with you!
+Press C-c C-z to bring me back.
+Welcome to Racket v8.15 [cs].
+racket@> (define v #(4 5))
+racket@> (vector-set! v 0 55)
+vector-set!: contract violation
+  expected: (and/c vector? (not/c immutable?))
+  given: '#(4 5)
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (vector-set! v 0 0)
+vector-set!: contract violation
+  expected: (and/c vector? (not/c immutable?))
+  given: '#(4 5)
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define fff (make-vector 10))
+racket@> (vector-set! fff 0 0)
+racket@> fff
+'#(0 0 0 0 0 0 0 0 0 0)
+racket@> (do ((i 1 (+ 1 i))
+              (j 0 (+ 1 i)))
+             ((= i 4))
+           (displayln j))
+0
+1
+2
+3
+racket@> (do ((i 1 (+ 1 i))
+              (j 0 (+ 1 i)))
+             ((= i 4))
+           (displayln j))
+0
+2
+3
+racket@> (begin (vector-set! fff 0 0) fff)
+'#(0 0 0 0 0 0 0 0 0 0)
+racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
+It's been nice interacting with you!
+Press C-c C-z to bring me back.
+Welcome to Racket v8.15 [cs].
+racket@> (require "uv/calculus.rkt")
+racket@> (gradient (lambda (x y) (* x y)) '(1 2))
+gradient: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
+It's been nice interacting with you!
+Press C-c C-z to bring me back.
+Welcome to Racket v8.15 [cs].
+racket@> (require "uv/calculus.rkt")
+uv/calculus.rkt:64:24: epsilon: unbound identifier
+  in: epsilon
+  location...:
+   uv/calculus.rkt:64:24
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> epsilon
+epsilon: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/calculus.rkt")
+racket@> ((gradient (lambda (x y) (* x y))) '(1 2))
+gradient: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/gradient (lambda (x y) (* x y))) '(1 2))
+vector-length: contract violation
+  expected: vector?
+  given: '(1 2)
+  context...:
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/calculus.rkt:59:4: body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/calculus.rkt")
+racket@> ((uv/gradient (lambda (x y) (* x y))) '(1 2))
+vector->list: contract violation
+  expected: vector?
+  given: #<void>
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/private/more-scheme.rkt:75:13: doloop
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/calculus.rkt")
+racket@> ((uv/gradient (lambda (x y) (* x y))) '(1 2))
+length: contract violation
+  expected: list?
+  given: '#(1 2)
+  context...:
+   /Applications/Racket v8.15/collects/racket/private/more-scheme.rkt:75:13: body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/calculus.rkt")
+racket@> ((uv/gradient (lambda (x y) (* x y))) '(1 2))
+length: contract violation
+  expected: list?
+  given: '#(1 2)
+  context...:
+   /Applications/Racket v8.15/collects/racket/private/more-scheme.rkt:75:13: body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
+It's been nice interacting with you!
+Press C-c C-z to bring me back.
+Welcome to Racket v8.15 [cs].
+racket@> (require "uv/calculus.rkt")
+uv/calculus.rkt:63:36: xs: unbound identifier
+  in: xs
+  location...:
+   uv/calculus.rkt:63:36
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/calculus.rkt")
+racket@> ((uv/gradient (lambda (x y) (* x y))) '(1 2))
+vector->list: contract violation
+  expected: vector?
+  given: #<void>
+  context...:
+   body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/calculus.rkt:60:6: doloop
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/calculus.rkt")
+racket@> ((uv/gradient (lambda (x y) (* x y))) '(1 2))
+vector-length: contract violation
+  expected: vector?
+  given: '(1 2)
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/gradient (lambda (x y) (* x y))) #(1 2))
+xxs: undefined;
+ cannot reference an identifier before its definition
+  in module: "/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/calculus.rkt"
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/private/more-scheme.rkt:75:13: doloop
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/calculus.rkt")
+racket@> ((uv/gradient (lambda (x y) (* x y))) #(1 2))
+xxs: undefined;
+ cannot reference an identifier before its definition
+  in module: "/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/calculus.rkt"
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/private/more-scheme.rkt:75:13: doloop
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/gradient (lambda (x y) (* x y))) #(1 2))
+'#(1.9999999989472883 0.999999993922529)
+racket@> (normalize ((uv/gradient (lambda (x y) (* x y))) #(1 2)))
+normalize: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/normalize ((uv/gradient (lambda (x y) (* x y))) #(1 2)))
+vector-map: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: at least 2
+  given: 1
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/normalize ((uv/gradient (lambda (x y) (* x y))) #(1 2)))
+'#(0.8944271919929295 0.4472135935139306)
+racket@> (uv/norm #(3 4 5))
+uv/norm: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/gradient (lambda (x y) (* x y))) #(1 2))
+'#(1.9999999989472883 0.999999993922529)
+racket@> (require "uv/calculus.rkt")
+racket@> (uv/norm #(3 4 5))
+uv/norm: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/normalize ((uv/gradient (lambda (x y) (* x y))) #(1 2)))
+'#(0.8944271919929295 0.4472135935139306)
+racket@> ((uv/gradient (lambda (x y) (* x y))) #(1 2))
+'#(1.9999999989472883 0.999999993922529)
+racket@> (vector-map round ((uv/gradient (lambda (x y) (* x y))) #(1 2)))
+'#(2.0 1.0)
+racket@> ((uv/gradient (lambda (x y) (* x y))) #(1 2))
+'#(2.000000165480742 1.000000082740371)
+racket@> ((uv/gradient (lambda (x y) (* x y))) #(1 2))
+'#(2.0000667788622195 1.000088900582341)
+racket@> (uv/normalize ((uv/gradient (lambda (x y) (* x y))) #(1 2)))
+'#(0.8944172610846203 0.44723345477936494)
+racket@> (uv/norm #(3 4))
+uv/norm: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/revise (lambda (x) (- x 1)) 10 39)
+uv/revise: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 0
+  given: 3
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/revise (lambda (x) (- x 1)) 10 39)
+uv/revise: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 0
+  given: 3
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/revise (lambda (x) (- x 1)) 10 39)
+uv/revise: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 0
+  given: 3
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
+It's been nice interacting with you!
+Press C-c C-z to bring me back.
+Welcome to Racket v8.15 [cs].
+racket@> (uv/revise (lambda (x) (- x 1)) 10 39)
+uv/revise: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 0
+  given: 3
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define (uv/revise)
+  (lambda (f revisions p)
+    (if (zero? revisions)
+        (p)
+        (uv/revise f (- revisions 1) (f p)))))
+
+racket@> (uv/revise (lambda (x) (- x 1)) 10 39)
+uv/revise: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 0
+  given: 3
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/revise (lambda (x) (- x 1)) 10 39)
+application: not a procedure;
+ expected a procedure that can be applied to arguments
+  given: 29
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/revise (lambda (x) (- x 1)) 10 39)
+29
+racket@> (vector 3)
+'#(3)
+racket@> (require "uv/optimization.rkt")
+load-handler: expected a `module` declaration in #<path:/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt>, but found something else
+  context...:
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/optimization.rkt")
+uv/calculus.rkt:58:1: defne: unbound identifier
+  in: defne
+  location...:
+   uv/calculus.rkt:58:1
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   [repeats 1 more time]
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/optimization.rkt")
+uv/optimization.rkt:6:9: provide: provided identifier is not defined or required
+  at: uv/grad-descent-line
+  in: (provide uv/revise uv/grad-descent uv/line-loss uv/grad-descent-line)
+  location...:
+   uv/optimization.rkt:6:9
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/optimization.rkt")
+racket@> (uv/grad-descent-line line-xs line-ys 2 '(0 0))
+uv/grad-descent-line: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 5
+  given: 4
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/grad-descent-line line-xs line-ys 2 '(0 0) 0.01)
+...ner/uv/calculus.rkt:41:6: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 0
+  context...:
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:37:2: body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/line-loss xs ys)
+xs: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/line-loss line-xs line-ys)
+...ner/uv/calculus.rkt:41:6: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 0
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/calculus.rkt")
+racket@> ((uv/l2-loss uv/line) line-xs line-ys) 
+#<procedure:...ner/uv/calculus.rkt:41:6>
+racket@> (((uv/l2-loss uv/line) line-xs line-ys) '(0 0)) 
+33.21
+racket@> (uv/line-loss xs ys)
+xs: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/line-loss line-xs line-ys)
+#<procedure>
+racket@> (uv/grad-descent-line line-xs line-ys 2 '(0 0) 0.01)
+uv/revise: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 3
+  given: 1
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/grad-descent-line line-xs line-ys 2 '(0 0) 0.01)
+uv/gradient: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 2
+  context...:
+   body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:12:2: uv/revise
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/grad-descent-line line-xs line-ys 2 '(0 0) 0.01)
+vector-length: contract violation
+  expected: vector?
+  given: '(0 0)
+  context...:
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/calculus.rkt:61:4: body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:12:2: uv/revise
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/grad-descent-line line-xs line-ys 2 '(0 0) 0.01)
+vector-length: contract violation
+  expected: vector?
+  given: '(0 0)
+  context...:
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/calculus.rkt:61:4: body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:12:2: uv/revise
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/grad-descent-line line-xs line-ys 2 '(0 0) 0.01)
+to-vector: undefined;
+ cannot reference an identifier before its definition
+  in module: "/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt"
+  context...:
+   body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:12:2: uv/revise
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/grad-descent-line line-xs line-ys 2 '(0 0) 0.01)
+to-vector: undefined;
+ cannot reference an identifier before its definition
+  in module: "/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt"
+  context...:
+   body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:12:2: uv/revise
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/grad-descent-line line-xs line-ys 2 '(0 0) 0.01)
+to-vector: undefined;
+ cannot reference an identifier before its definition
+  in module: "/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt"
+  context...:
+   body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:12:2: uv/revise
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/optimization.rkt")
+racket@> (uv/grad-descent-line line-xs line-ys 2 '(0 0) 0.01)
+to-vector: undefined;
+ cannot reference an identifier before its definition
+  in module: "/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt"
+  context...:
+   body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:12:2: uv/revise
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
+It's been nice interacting with you!
+Press C-c C-z to bring me back.
+Welcome to Racket v8.15 [cs].
+racket@> (require "uv/optimization.rkt")
+racket@> (uv/grad-descent-line line-xs line-ys 2 '(0 0) 0.01)
+application: not a procedure;
+ expected a procedure that can be applied to arguments
+  given: #f
+  context...:
+   body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/vector.rkt:18:2: to-vector
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:20:5
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:12:2: uv/revise
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/vector.rkt")
+racket@> (to-vector 3)
+application: not a procedure;
+ expected a procedure that can be applied to arguments
+  given: #t
+  context...:
+   body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/vector.rkt:18:2: to-vector
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (to-vector 3)
+application: not a procedure;
+ expected a procedure that can be applied to arguments
+  given: #t
+  context...:
+   body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/vector.rkt:18:2: to-vector
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (to-vector 3)
+application: not a procedure;
+ expected a procedure that can be applied to arguments
+  given: #t
+  context...:
+   body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/vector.rkt:18:2: to-vector
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
+It's been nice interacting with you!
+Press C-c C-z to bring me back.
+Welcome to Racket v8.15 [cs].
+racket@> (require "uv/vector.rkt")
+uv/vector.rkt:23:7: _: wildcard not allowed as an expression
+  in: _
+  location...:
+   uv/vector.rkt:23:7
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/vector.rkt")
+racket@> (to-vector 3)
+'#(3)
+racket@> (uv/grad-descent-line line-xs line-ys 2 '(0 0) 0.01)
+uv/grad-descent-line: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/optimization.rkt")
+racket@> (uv/grad-descent-line line-xs line-ys 2 '(0 0) 0.01)
+...uv/optimization.rkt:34:4: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 2
+  context...:
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/calculus.rkt:62:6: body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:20:5
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:12:2: uv/revise
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define loss (uv/line-loss line-xs line-y))
+line-y: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define loss (uv/line-loss line-xs line-ys))
+racket@> (loss '(0 0'))
+stdin::37335: read-syntax: unexpected `)`
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/user.rkt:89:0
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> stdin::37547: read-syntax: unexpected `)`
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/user.rkt:89:0
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (loss '(0 0))
+...ner/uv/calculus.rkt:41:6: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 0
+  context...:
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:34:4: body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> loss
+#<procedure:...uv/optimization.rkt:34:4>
+racket@> ((uv/line-loss line-xs line-ys) '(0 0))
+...ner/uv/calculus.rkt:41:6: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 0
+  context...:
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:34:4: body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/line-loss line-xs line-ys) '(0 0))
+...ner/uv/calculus.rkt:41:6: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 0
+  context...:
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:34:4: body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define uv/line-loss
+  (lambda (xs ys)
+    (lambda (theta)
+      (((uv/l2-loss uv/line) xs ys) theta))))
+racket@> ((uv/line-loss line-xs line-ys) '(0 0))
+uv/l2-loss: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   stdin::53843
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/calculus.rkt")
+racket@> ((uv/line-loss line-xs line-ys) '(0 0))
+uv/l2-loss: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   stdin::53843
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/line-loss line-xs line-ys) '(0 0))
+uv/l2-loss: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   stdin::53843
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@>    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26  M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
+It's been nice interacting with you!
+Press C-c C-z to bring me back.
+Welcome to Racket v8.15 [cs].
+racket@> (require "uv/calculus.rkt")
+racket@> (require "uv/optimization.rkt")
+uv/optimization.rkt:32:0: read-syntax: expected a `)` to close `(`
+  possible cause: indentation suggests a missing `)` before line 37
+  context...:
+   /Applications/Racket v8.15/collects/syntax/module-reader.rkt:214:17: body
+   /Applications/Racket v8.15/collects/syntax/module-reader.rkt:211:2: wrap-internal
+   /Applications/Racket v8.15/collects/racket/../syntax/module-reader.rkt:76:9: wrap-internal/wrapper
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/optimization.rkt")
+racket@> ((uv/line-loss line-xs line-ys) '(0 0))
+33.21
+racket@> (uv/grad-descent-line line-xs line-ys 2 '(0 0) 0.01)
+...uv/optimization.rkt:34:4: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 2
+  context...:
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/calculus.rkt:62:6: body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:20:5
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:12:2: uv/revise
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/grad-descent (uv/line-loss line-xs line ys) 2 '(0 0) 0.01)
+line: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/grad-descent (uv/line-loss line-xs line ys) 2 '(0 0) 0.01)
+line: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/grad-descent (uv/line-loss line-xs line-ys) 2 '(0 0) 0.01)
+...uv/optimization.rkt:34:4: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 2
+  context...:
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/calculus.rkt:62:6: body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:20:5
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:12:2: uv/revise
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/gradient (uv/loss-line line-xs line-ys) (to-vector '(0 0)))
+to-vector: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/vector.rkt")
+racket@> (uv/gradient (uv/loss-line line-xs line-ys) (to-vector '(0 0)))
+uv/gradient: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 2
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/gradient (uv/loss-line line-xs line-ys)) (to-vector '(0 0)))
+...ner/uv/calculus.rkt:49:4: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 2
+  context...:
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/calculus.rkt:62:6: body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/gradient (uv/loss-line line-xs line-ys)) (to-vector '(0 0)))
+...ner/uv/calculus.rkt:49:4: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 2
+  context...:
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/calculus.rkt:62:6: body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/gradient (lambda (xs) ()) 0 0))
+stdin::72147: #%app: missing procedure expression;
+ probably originally (), which is an illegal empty application
+  in: (#%app)
+  location...:
+   stdin::72147
+  context...:
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/gradient (lambda (y x) (+ x y 4))) #(4 5)) 
+'#(1.000000082740371 1.000000082740371)
+racket@>    stdin::72147  M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
+It's been nice interacting with you!
+Press C-c C-z to bring me back.
+Welcome to Racket v8.15 [cs].
+racket@> (require "uv/calculus.rkt")
+uv/calculus.rkt:73:0: read-syntax: expected a `)` to close `(`
+  possible cause: indentation suggests a missing `)` before line 97
+  context...:
+   /Applications/Racket v8.15/collects/syntax/module-reader.rkt:214:17: body
+   /Applications/Racket v8.15/collects/syntax/module-reader.rkt:211:2: wrap-internal
+   /Applications/Racket v8.15/collects/racket/../syntax/module-reader.rkt:76:9: wrap-internal/wrapper
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:37:2: reader
+   /Applications/Racket v8.15/collects/syntax/private/modcode-noctc.rkt:192:5: compile-one
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/calculus.rkt")
+racket@> ((uv/gradient (uv/loss-line line-xs line-ys)) (to-vector '(0 0)))
+to-vector: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/vector.rkt")
+racket@> ((uv/gradient (uv/loss-line line-xs line-ys)) (to-vector '(0 0)))
+'#(-78125015.3209564 -227272525.81509402)
+racket@> ((uv/gradient (uv/loss-line line-xs line-ys)) (to-vector '(0.0099 0)))
+'#(-78856879.0121369 -229336850.23573437)
+racket@> ((uv/gradient (uv/loss-line line-xs line-ys)) (to-vector '(1 0)))
+'#(-1249999922.430907 -2499999896.57454)
+racket@> 
+racket@> ((uv/gradient (uv/loss-line line-xs line-ys)) (to-vector '(100 0)))
+'#(842251.0237969601 2528100.5546937385)
+racket@> ((uv/gradient (uv/loss-line line-xs line-ys)) (to-vector '(1000 0)))
+'#(83392.33708978152 249952.39778135504)
+racket@> (uv/line line-xs line-ys)
+uv/line: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 2
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/line)
+
+((uv/loss-line line-xs line-ys) '0 0)
+uv/line: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 0
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ...ner/uv/calculus.rkt:63:4: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 2
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/line xs) #(0 0))
+xs: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/line line-xs) #(0 0))
+'#(0 0 0 0)
+racket@> ((uv/line line-xs) #(0.099 0))
+'#(0.198 0.099 0.396 0.29700000000000004)
+racket@> (((uv/l2-loss uv/line) line-xs line-ys) #(0 0))
+33.21
+racket@> (((uv/l2-loss uv/line) line-xs line-ys) #(0.099 0))
+27.26703
+racket@> (((uv/l2-loss uv/line) line-xs line-ys) #(0.0099 0))
+32.5892403
+racket@> (uv/gradient ((uv/l2-loss uv/line) line-xs line-ys) #(0.0099 0))
+uv/gradient: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 2
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/gradient ((uv/l2-loss uv/line) line-xs line-ys)) #(0.0099 0))
+'#(-78856879.0121369 -229336850.23573437)
+racket@> (define @ vector-ref)
+racket@> ((uv/gradient (lambda (xs) (* (@ xs 0) (@ xs 1)))) #(4 5))
+'#(1249994319.6288607 1666666482.799196)
+racket@> ((uv/gradient (lambda (xs) (* (@ xs 0) (@ xs 1)))) #(4 5))
+#(4.0000000001 5)
+dsx-: undefined;
+ cannot reference an identifier before its definition
+  in module: "/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/calculus.rkt"
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/private/more-scheme.rkt:75:13: doloop
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/gradient (lambda (xs) (* (@ xs 0) (@ xs 1)))) #(4 5))
+#(4.0000000001 5)
+#(3.9999999999 5)
+#(4 5.0000000001)
+#(4 4.9999999999)
+'#(1249994319.6288607 1666666482.799196)
+racket@> ((uv/gradient (lambda (xs) (* (@ xs 0) (@ xs 1)))) #(4 5))
+#(4.0000000001 5)
+#(3.9999999999 5)
+#(4 5.0000000001)
+#(4 4.9999999999)
+'#(1249994319.6288607 1666666482.799196)
+racket@> ((uv/gradient (lambda (xs) (* (@ xs 0) (@ xs 1)))) #(4 5))
+#(4.0000000001 5)
+#(3.9999999999 5)
+ij: undefined;
+ cannot reference an identifier before its definition
+  in module: "/Users/ugo/projects/ugovaretto-education/the-little-learner/uv/calculus.rkt"
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/private/more-scheme.rkt:75:13: doloop
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/gradient (lambda (xs) (* (@ xs 0) (@ xs 1)))) #(4 5))
+#(4.0000000001 5)
+#(3.9999999999 5)
+#(4 5.0000000001)
+#(4 4.9999999999)
+'#(5.000018177270249 4.000000330961484)
+racket@> (uv/gradient ((uv/l2-loss uv/line) line-xs line-ys) #(0.0099 0))
+uv/gradient: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 2
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> ((uv/gradient ((uv/l2-loss uv/line) line-xs line-ys)) #(0.0099 0))
+#(0.0099000001 0)
+#(0.009899999900000001 0)
+#(0.0099 1e-10)
+#(0.0099 -1e-10)
+'#(-62.40600924911632 -20.801991240659845)
+racket@> ((uv/gradient ((uv/l2-loss uv/line) line-xs line-ys)) #(0.0099 0))
+'#(-62.40600924911632 -20.801991240659845)
+racket@> (uv/grad-descent (uv/line-loss line-xs line-ys) 2 '(0 0) 0.01)
+uv/grad-descent: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/optimization.rkt")
+racket@> (uv/grad-descent (uv/line-loss line-xs line-ys) 2 '(0 0) 0.01)
+vector-length: contract violation
+  expected: vector?
+  given: '(0 0)
+  context...:
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/vector.rkt:34:2: body of top-level
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/vector.rkt:48:2: vector-foldl
+   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:12:2: uv/revise
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (uv/grad-descent (uv/line-loss line-xs line-ys) 10 #(0 0) 0.01)
+'#(0.8399999362751487 0.27720024053934367)
+racket@> (uv/grad-descent (uv/line-loss line-xs line-ys) 10 #(0 0) 0.01)
+'#(0.9534697045787688 0.2837606510874835)
+racket@> (uv/grad-descent (uv/line-loss line-xs line-ys) 20 #(0 0) 0.01)
+'#(0.9644398682451261 0.25155721672387443)
+racket@> (uv/grad-descent (uv/line-loss line-xs line-ys) 200 #(0 0) 0.01)
+'#(1.0402174718815438 0.028761829029555486)
+racket@> (define opt-theta (uv/grad-descent (uv/line-loss line-xs line-ys) 200 #(0 0) 0.01))
+racket@> (require "uv/plot.rkt")
+racket@> (require "uv/plot.rkt")
+racket@> (define line-scatter-plot
+  (lambda (xs ys theta color-p color-l)
+    (let ((xm (- (vmin xs) 0.1))
+          (xM (+ (vmax xs) 0.1))
+          (ym (- (vmin ys) 0.1))
+          (yM (+ (vmax ys) 0.1)))
+      (plot
+       (list
+        (points
+         (vector-map vector xs ys)
+         #:color color-p
+         #:x-min xm
+         #:x-max xM
+         #:y-min ym
+         #:y-max yM)
+        (function
+         (uv/line-eq theta)
+         xm
+         xM
+         #:color color-l))))))
+racket@> (line-scatter-plot line-xs line-ys opt-theta 'blue 'red)
+plot: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   stdin::236047: line-scatter-plot
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require plot)
+racket@> (line-scatter-plot line-xs line-ys opt-theta 'blue 'red)
+plot: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   stdin::236047: line-scatter-plot
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require plot)(define line-scatter-plot
+  (lambda (xs ys theta color-p color-l)
+    (let ((xm (- (vmin xs) 0.1))
+          (xM (+ (vmax xs) 0.1))
+          (ym (- (vmin ys) 0.1))
+          (yM (+ (vmax ys) 0.1)))
+      (plot
+       (list
+        (points
+         (vector-map vector xs ys)
+         #:color color-p
+         #:x-min xm
+         #:x-max xM
+         #:y-min ym
+         #:y-max yM)
+        (function
+         (uv/line-eq theta)
+         xm
+         xM
+         #:color color-l))))))
+racket@> racket@> 
+racket@> (line-scatter-plot line-xs line-ys opt-theta 'blue 'red)
+[image]
 racket@> 

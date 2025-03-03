@@ -1,5 +1,6 @@
 (require "uv/calculus.rkt")
 (require "uv/plot.rkt")
+(require "uv/optimization.rkt")
 (require plot)
 
 ;; Points
@@ -84,3 +85,22 @@
   (lambda (xs ys theta1)
     (lambda(x)
       (((uv-l2-loss line) xs ys) (list x theta1)))))
+
+
+(define grad-descent-and-plot
+  (lambda (xs ys descent-steps
+              (init-value #(0 0))
+              (learning-rate 0.01))
+    (let ((opt-theta
+           (uv/grad-descent
+            (uv/line-loss line-xs line-ys)
+            descent-steps
+            init-value
+            learning-rate)))
+     (line-scatter-plot
+      line-xs
+      line-ys
+      opt-theta
+      'blue
+      'red
+      (format "~a" opt-theta)))))

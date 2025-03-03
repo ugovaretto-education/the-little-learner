@@ -1,3 +1,5 @@
+#lang racket
+
 (provide uv/revise
          uv/grad-descent
          uv/line-loss
@@ -16,9 +18,9 @@
   (lambda (f revisions p a)
     (uv/revise
      (lambda (v)
-       (v- v (v* a (uv/gradient f v)))
+       (v- v (v* a ((uv/gradient f) (to-vector v)))))
        revisions
-       p))))
+       p)))
   ;; (lambda (f revisions p a)
   ;;   (if (zero? revisions)
   ;;       p
@@ -29,8 +31,9 @@
 
 (define uv/line-loss
   (lambda (xs ys)
-    (((uv/l2-loss uv/line) xs ys))))
+    (lambda (theta)
+      (((uv/l2-loss uv/line) xs ys) theta))))
 
-(define grad-descent-line
+(define uv/grad-descent-line
   (lambda (xs ys revisions p a)
     (uv/grad-descent (uv/line-loss xs ys) revisions p a)))
