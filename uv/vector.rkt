@@ -12,7 +12,9 @@
          vsum
          vmin
          vmax
-         to-vector)
+         to-vector
+         norm
+         normalize)
 
 (define to-vector
   (lambda (x)
@@ -91,3 +93,14 @@
 (define vmax
   (λ (v)
     (vector-argmax (λ (x) x) v)))
+
+(define normalize
+  (lambda (xs)
+    (let ((m (norm xs)))
+      (vector-map (lambda (x) (/ x m)) xs))))
+
+(define norm
+  (lambda (xs)
+    (if (scalar? xs)
+        (sqrt (sqr xs))
+        (sqrt (vsum (vector-map sqr xs))))))

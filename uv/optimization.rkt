@@ -10,7 +10,7 @@
 
 (define uv/revise
   (lambda (f revisions p)
-    (if (zero? revisions)
+    (if (or (zero? revisions) (>= (norm (f p)) (norm p)))
         p
         (uv/revise f (- revisions 1) (f p)))))
 

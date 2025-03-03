@@ -87,7 +87,7 @@
       (((uv-l2-loss line) xs ys) (list x theta1)))))
 
 
-(define grad-descent-and-plot
+(define grad-descent-and-plot-line
   (lambda (xs ys descent-steps
               (init-value #(0 0))
               (learning-rate 0.01))

@@ -2457,4 +2457,143 @@ racket@> (require plot)(define line-scatter-plot
 racket@> racket@> 
 racket@> (line-scatter-plot line-xs line-ys opt-theta 'blue 'red)
 [image]
+racket@> (require plot)(define line-scatter-plot
+  (lambda (xs ys theta color-p color-l (label ""))
+    (let ((xm (- (vmin xs) 0.1))
+          (xM (+ (vmax xs) 0.1))
+          (ym (- (vmin ys) 0.1))
+          (yM (+ (vmax ys) 0.1)))
+      (plot
+       (list
+        (points
+         (vector-map vector xs ys)
+         #:color color-p
+         #:x-min xm
+         #:x-max xM
+         #:y-min ym
+         #:y-max yM)
+        (function
+         (uv/line-eq theta)
+         xm
+         xM
+         #:color color-l))))))
+racket@> racket@> (require plot)(define line-scatter-plot
+  (lambda (xs ys theta color-p color-l (label ""))
+    (let ((xm (- (vmin xs) 0.1))
+          (xM (+ (vmax xs) 0.1))
+          (ym (- (vmin ys) 0.1))
+          (yM (+ (vmax ys) 0.1)))
+      (plot
+       (list
+        (points
+         (vector-map vector xs ys)
+         #:color color-p
+         #:x-min xm
+         #:x-max xM
+         #:y-min ym
+         #:y-max yM)
+        (function
+         (uv/line-eq theta)
+         xm
+         xM
+         #:color color-l))
+       #:label label))))
+racket@> racket@> 
+racket@> (line-scatter-plot line-xs line-ys opt-theta 'blue 'red "a label")
+application: procedure does not expect an argument with given keyword
+  procedure: plot
+  given keyword: #:label
+  arguments...:
+   (list (renderer2d (vector (ivl 0.9 4.1) (ivl 1.0999999999999999 4.3)) #f #<procedure:default-ticks-fun> #f #<procedure:...te/plot2d/point.rkt:27:0>) (renderer2d (vector (ivl 0.9 4.1) (ivl #f #f)) #<procedure:...on/plot-element.rkt:46:0> #<procedure:defa...
+   #:label "a label"
+  context...:
+   /Applications/Racket v8.15/collects/racket/private/kw.rkt:1647:4: body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require plot)(define line-scatter-plot
+  (lambda (xs ys theta color-p color-l (label ""))
+    (let ((xm (- (vmin xs) 0.1))
+          (xM (+ (vmax xs) 0.1))
+          (ym (- (vmin ys) 0.1))
+          (yM (+ (vmax ys) 0.1)))
+      (plot
+       (list
+        (points
+         (vector-map vector xs ys)
+         #:color color-p
+         #:x-min xm
+         #:x-max xM
+         #:y-min ym
+         #:y-max yM)
+        (function
+         (uv/line-eq theta)
+         xm
+         xM
+         #:color color-l))))))
+racket@> racket@> (require plot)(define line-scatter-plot
+  (lambda (xs ys theta color-p color-l (label ""))
+    (let ((xm (- (vmin xs) 0.1))
+          (xM (+ (vmax xs) 0.1))
+          (ym (- (vmin ys) 0.1))
+          (yM (+ (vmax ys) 0.1)))
+      (plot
+       (list
+        (points
+         (vector-map vector xs ys)
+         #:color color-p
+         #:x-min xm
+         #:x-max xM
+         #:y-min ym
+         #:y-max yM)
+        (function
+         (uv/line-eq theta)
+         xm
+         xM
+         #:color color-l
+         #:label label))))))
+racket@> racket@> (line-scatter-plot line-xs line-ys opt-theta 'blue 'red "a label")
+[image]
+racket@> (format opt-theta)
+format: contract violation
+  expected: string?
+  given: '#(1.0402174718815438 0.028761829029555486)
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (format "~a" opt-theta)
+"#(1.0402174718815438 0.028761829029555486)"
+racket@> (line-scatter-plot line-xs line-ys opt-theta 'blue 'red (format "~a" opt-theta))
+[image]
+racket@> (require "uv/vector.rkt")
+racket@> (require "uv/vector.rkt")
+racket@> (define norm
+  (lambda (xs)
+    (sqrt (vsum (vector-map sqr xs)))))
+
+racket@> (norm #(3 4 5))
+7.0710678118654755
+racket@> (define norm
+  (lambda (xs)
+    (if (scalar? xs)
+        (sqrt (sqr xs))
+        (sqrt (vsum (vector-map sqr xs))))))
+
+racket@> (norm #(3 4 5))
+scalar?: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   stdin::712550: norm
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/utility.rkt")
+racket@> (define norm
+  (lambda (xs)
+    (if (scalar? xs)
+        (sqrt (sqr xs))
+        (sqrt (vsum (vector-map sqr xs))))))
+
+racket@> (norm #(3 4 5))
+7.0710678118654755
+racket@> (norm -4)
+4
 racket@> 

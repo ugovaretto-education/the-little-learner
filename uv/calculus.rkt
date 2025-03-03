@@ -6,9 +6,7 @@
          uv/line-eq
          uv/loss-line
          uv/loss-line-m
-         uv/gradient
-         uv/normalize
-         uv/norm)
+         uv/gradient)
 
 (require "tensor.rkt"
          "utility.rkt"
@@ -94,11 +92,3 @@
                             dx)))
             gs))))))
 
-(define uv/normalize
-  (lambda (xs)
-    (let ((m (uv/norm xs)))
-      (vector-map (lambda (x) (/ x m)) xs))))
-
-(define uv/norm
-  (lambda (xs)
-    (sqrt (vsum (vector-map sqr xs)))))
