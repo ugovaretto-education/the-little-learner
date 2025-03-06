@@ -2,7 +2,8 @@
 
 (provide scatter-plot
          line-plot
-         line-scatter-plot)
+         line-scatter-plot
+         line-scatter-plot-file)
 
 (require "vector.rkt" "calculus.rkt")
 
@@ -40,7 +41,7 @@
 
 
 (define line-scatter-plot
-  (lambda (xs ys theta color-p color-l (label ""))
+  (lambda (xs ys theta color-p color-l (label "") (filename ""))
     (let ((xm (- (vmin xs) 0.1))
           (xM (+ (vmax xs) 0.1))
           (ym (- (vmin ys) 0.1))
@@ -59,7 +60,33 @@
          xm
          xM
          #:color color-l
-         #:label label))))))
+         #:label label))
+       #:out-file filename))))
+
+(define line-scatter-plot-file
+  (lambda (xs ys theta color-p color-l filename (label ""))
+    (let ((xm (- (vmin xs) 0.1))
+          (xM (+ (vmax xs) 0.1))
+          (ym (- (vmin ys) 0.1))
+          (yM (+ (vmax ys) 0.1)))
+      (plot-file
+       (list
+        (points
+         (vector-map vector xs ys)
+         #:color color-p
+         #:x-min xm
+         #:x-max xM
+         #:y-min ym
+         #:y-max yM)
+        (function
+         (uv/line-eq theta)
+         xm
+         xM
+         #:color color-l
+         #:label label))
+       filename
+       'jpeg))))
+
 
 ;; (require plot)
 ;; (plot (function (line-eq '(0.5 -1)) (- 2) 2 #:label "y = line-eq(x)"))

@@ -21,3 +21,16 @@
                   (car xs)
                   (list->string
                    (take (string->list (cadr xs)) decimal-digits)))))))
+
+(define num-digits
+  (lambda (n)
+    (if (< n 10)
+        1
+        (+ 1 (num-digits (/ n 10))))))
+
+(define left-pad
+  (lambda (num c n)
+    (do ((i 0 (+ 1 i))
+         (d (num-digits num))
+         (padded (number->string num) (format "~a~a" c padded)))
+      ((= i (- n d)) padded))))

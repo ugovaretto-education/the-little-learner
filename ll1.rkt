@@ -86,11 +86,20 @@
     (lambda(x)
       (((uv-l2-loss line) xs ys) (list x theta1)))))
 
+(define render-step-fun
+  (lambda (xs ys file-prefix (sample-step 1))
+    (lambda (i theta)
+      (let ((fname (format "~a~a.jpg" file-prefix i)))
+        (begin;;when (= (remainder i sample-step) 0)
+          (line-scatter-plot-file
+             xs ys theta 'blue 'red fname (format "~a" theta))
+            )))))
 
 (define grad-descent-and-plot-line
   (lambda (xs ys descent-steps
               (init-value #(0 0))
-              (learning-rate 0.01))
+              (learning-rate 0.01)
+              (filename #f))
     (let ((opt-theta
            (uv/grad-descent
             (uv/line-loss line-xs line-ys)
@@ -98,9 +107,47 @@
             init-value
             learning-rate)))
      (line-scatter-plot
-      line-xs
+      xs
       line-ys
       opt-theta
       'blue
       'red
-      (format "~a" opt-theta)))))
+      (format "~a" opt-theta)
+      filename))))
+
+(define grad-descent-and-plot-line-anim
+  (lambda (xs ys descent-steps fname
+              (init-value #(0 0))
+              (learning-rate 0.01))
+           (uv/grad-descent-line-log
+            (uv/line-loss line-xs line-ys)
+            descent-steps
+            init-value
+            learning-rate
+            (render-step-fun xs ys fname))))
+
+
+(define-syntax-rule (declare-hype x)
+  (define x null))
+
+;; like let macro
+(define-syntax with-hyper
+  (syntax-rules ()
+    ((with-hyper ((var val) ...) body ...)
+     (begin
+       (set! var val) ...
+       body ...))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(define-syntax uv-let
+  (syntax-rules ()
+    ((let ((var val) ...) body ...)
+      ((lambda (var ...) body ...) val ...))))
+
+(define-syntax uv-let*
+  (syntax-rules ()
+    ((let* () body ...) ; base case
+      ((lambda () body ...)))
+    ((let* ((var val) rest ...) body ...) ; binding case
+      ((lambda (var) (let* (rest ...) body ...)) val))))
