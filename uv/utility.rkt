@@ -2,7 +2,8 @@
 
 (provide symbol->function
          scalar?
-         fformat)
+         fformat
+         left-pad)
 
 (define symbol->function
   (lambda (f)
@@ -30,7 +31,9 @@
 
 (define left-pad
   (lambda (num c n)
-    (do ((i 0 (+ 1 i))
-         (d (num-digits num))
-         (padded (number->string num) (format "~a~a" c padded)))
-      ((= i (- n d)) padded))))
+    (if (>= (num-digits num) n)
+        (number->string num)
+        (do ((i 0 (+ 1 i))
+             (d (num-digits num))
+             (padded (number->string num) (format "~a~a" c padded)))
+            ((= i (- n d)) padded)))))

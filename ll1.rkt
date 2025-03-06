@@ -51,6 +51,7 @@
 
 (define plot-loss-weights
   (lambda (xs ys ws c cw)
+    (let ((x (car (car ws))))
     (plot
      (list
       (function
@@ -59,19 +60,79 @@
        #:y-min -10
        #:y-max 200
        #:color c)
-      (points (loss-weights xs ys ws) #:color cw)))))
+      (points (loss-weights xs ys ws) #:color cw)
+      (point-label (vector x ((uv/loss-line-m line-xs line-ys) x)) ""
+                   #:point-size 8 #:point-color "firebrick"))))))
+
+(define plot-loss-weight-file
+  (lambda (xs ys w filename)
+    (plot-file
+     (list
+      (function
+       (uv/loss-line-m line-xs line-ys) -1.1 4
+       #:samples 50
+       #:y-min -10
+       #:y-max 200
+       #:color 'blue)
+      (point-label (vector w ((uv/loss-line-m line-xs line-ys) w)) ""
+                   #:point-size 8 #:point-color "firebrick"))
+     filename
+     'jpeg)))
+
+
 
 (define plot-theta-3d
-  (lambda (xs ys)
-    (plot3d (surface3d
+  (lambda (xs ys theta)
+    (plot3d
+     (list
+      (surface3d
              (lambda (x y)
-               ((uv/loss-line line-xs line-ys) (list x y)))
+               ((uv/loss-line line-xs line-ys) (vector x y)))
                0 4 -2 2
                #:z-min -10
                #:z-max 200
-               #:samples 100
-               #:style 'solid)
-            #:altitude 10)))
+               ;;#:samples 100
+               #:color 5
+               #:line-color 5)
+               ;;#:style 'solid)
+      (point-label3d (vector (vector-ref theta 0) (vector-ref theta 1)
+                             (((uv/l2-loss uv/line) line-xs line-ys)
+                              theta))
+                     "" #:point-size 10 #:point-color "firebrick" )
+      (lines3d (list (vector (vector-ref theta 0) (vector-ref theta 1) -10)
+                     (vector (vector-ref theta 0) (vector-ref theta 1)
+                             (((uv/l2-loss uv/line) xs ys) theta)))))
+                     ;;      (((uv/l2-loss uv/line) line-xs line-ys)
+                     ;;        theta)))))
+     #:altitude -2
+     #:angle 15)))
+
+(define plot-loss-3d-file
+  (lambda (xs ys theta filename)
+    (plot3d-file
+     (list
+      (surface3d
+             (lambda (x y)
+               ((uv/loss-line line-xs line-ys) (vector x y)))
+               0 4 -2 2
+               #:z-min -10
+               #:z-max 200
+               ;;#:samples 100
+               #:color 5
+               #:line-color 5)
+               ;;#:style 'solid)
+      (point-label3d (vector (vector-ref theta 0) (vector-ref theta 1)
+                             (((uv/l2-loss uv/line) line-xs line-ys)
+                              theta))
+                     "" #:point-size 10 #:point-color "firebrick" )
+      (lines3d (list (vector (vector-ref theta 0) (vector-ref theta 1) -10)
+                     (vector (vector-ref theta 0) (vector-ref theta 1)
+                             (((uv/l2-loss uv/line) xs ys) theta)))))
+     #:altitude -2
+     #:angle 15
+     filename
+     'jpeg)))
+
 
 ;; t0 = t0 - learning-rate * rate-of-change
 
@@ -92,8 +153,12 @@
       (let ((fname (format "~a~a.jpg" file-prefix i)))
         (begin;;when (= (remainder i sample-step) 0)
           (line-scatter-plot-file
-             xs ys theta 'blue 'red fname (format "~a" theta))
-            )))))
+           xs ys theta 'blue 'red fname (format "~a" theta))
+          (plot-loss-weight-file xs ys
+                                 (vector-ref theta 0)
+                                 (format "loss-~a~a.jpg" file-prefix i))
+          (plot-loss-3d-file xs ys theta
+                             (format "loss-3d-~a~a.jpg" file-prefix i)))))))
 
 (define grad-descent-and-plot-line
   (lambda (xs ys descent-steps
@@ -115,7 +180,7 @@
       (format "~a" opt-theta)
       filename))))
 
-(define grad-descent-and-plot-line-anim
+(define grad-descent-and-plot-anim
   (lambda (xs ys descent-steps fname
               (init-value #(0 0))
               (learning-rate 0.01))
@@ -126,6 +191,28 @@
             learning-rate
             (render-step-fun xs ys fname))))
 
+(define make-animation
+  (lambda (glob delay fname) ;; glob = "*.jpg"
+    (system
+     (format "magick convert -delay ~a -loop 0 ~a ~a" delay glob fname))))
+
+(define stich-images
+  (lambda (n prefix-1 prefix-2 prefix-3 out-prefix)
+    (do ((i 0 (+ 1 i))
+         (out (format "~a0.jpg" out-prefix)
+              (format "~a~a.jpg" out-prefix i))
+         (in-1 (format "~a0.jpg" prefix-1)
+               (format "~a~a.jpg" prefix-1 i))
+         (in-2 (format "~a0.jpg" prefix-2)
+               (format "~a~a.jpg" prefix-2 i))
+         (in-3 (format "~a0.jpg" prefix-3)
+               (format "~a~a.jpg" prefix-3 i)))
+        ((= i n))
+      (begin
+        ;;(displayln (format "~a ~a ~a ~a" i in-1 in-2 out))
+        (system (format "magick convert +append ~a ~a ~a ~a"
+                      in-1 in-2 in-3 out))))))
+;;
 
 (define-syntax-rule (declare-hype x)
   (define x null))

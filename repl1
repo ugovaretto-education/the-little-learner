@@ -1154,4 +1154,396 @@ racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-" #(0 0) 0
 '#(0.9534697045787688 0.2837606510874835)
 racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-" #(0 0) 0.005)
 '#(0.9313185979353822 0.2959449574291284)
+racket@> (plot-loss-weights line-xs line-ys ws 'blue 'red)
+ws: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (plot-loss-weights line-xs line-ys weights 'blue 'red)
+[image]
+racket@> (plot-loss-weights line-xs line-ys weights 'blue 'red)
+line-y: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   plot-loss-weights
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (plot-loss-weights line-xs line-ys weights 'blue 'red)
+line-y: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   plot-loss-weights
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (plot-loss-weights line-xs line-ys weights 'blue 'red)
+[image]
+racket@> (plot-loss-weights line-xs line-ys weights 'blue 'red)
+[image]
+racket@> (plot-loss-weight-file line-xs line-ys 1 "weight-loss.jpg")
+racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
+'#(0.9534697045787688 0.2837606510874835)
+racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
+'#(0.9534697045787688 0.2837606510874835)
+racket@> (make-animation "weight*" "weights.gif")
+WARNING: The convert command is deprecated in IMv7, use "magick" instead of "convert" or "magick convert"
+
+convert: invalid argument for option '-delay': weight-descent-0 @ error/deprecate.c/ConvertImageCommand/1316.
+#f
+racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
+'#(0.9534697045787688 0.2837606510874835)
+racket@> (make-animation "weight*" "weights.gif")
+WARNING: The convert command is deprecated in IMv7, use "magick" instead of "convert" or "magick convert"
+
+convert: invalid argument for option '-delay': weight-descent-0.jpg @ error/deprecate.c/ConvertImageCommand/1316.
+#f
+racket@> (make-animation "weight*" 20 "weights.gif")
+make-animation: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 2
+  given: 3
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (make-animation "weight*" 20 "weights.gif")
+WARNING: The convert command is deprecated in IMv7, use "magick" instead of "convert" or "magick convert"
+
+#t
+racket@> (make-animation "weight*" 20 "weights.gif")
+WARNING: The convert command is deprecated in IMv7, use "magick" instead of "convert" or "magick convert"
+
+#t
+racket@> (make-animation "weight*" 20 "weights.gif")
+WARNING: The convert command is deprecated in IMv7, use "magick" instead of "convert" or "magick convert"
+
+#t
 racket@> 
+racket@> (stich-images "weight-descent-" "descent-" "wd-")
+stich-images: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 4
+  given: 3
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
+format: ill-formed pattern string
+  explanation: tag `~0` not allowed; arguments were: "wd-"
+  context...:
+   body of top-level
+   stich-images
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
+10
+racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
+10
+racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
+
+0 weight-descent-0.jpg descent-0.jpg wd-0.jpg
+application: not a procedure;
+ expected a procedure that can be applied to arguments
+  given: "magick montage -concatenate ~a ~a ~a"
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/private/more-scheme.rkt:75:13: doloop
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
+0 weight-descent-0.jpg descent-0.jpg wd-0.jpg
+application: not a procedure;
+ expected a procedure that can be applied to arguments
+  given: "magick montage -concatenate ~a ~a ~a"
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/private/more-scheme.rkt:75:13: doloop
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
+0 weight-descent-0.jpg descent-0.jpg wd-0.jpg
+application: not a procedure;
+ expected a procedure that can be applied to arguments
+  given: "magick montage -concatenate ~a ~a ~a"
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/private/more-scheme.rkt:75:13: doloop
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
+0 weight-descent-0.jpg descent-0.jpg wd-0.jpg
+montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
+1 weight-descent-0.jpg descent-0.jpg wd-0.jpg
+montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
+2 weight-descent-1.jpg descent-1.jpg wd-1.jpg
+montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
+3 weight-descent-2.jpg descent-2.jpg wd-2.jpg
+montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
+4 weight-descent-3.jpg descent-3.jpg wd-3.jpg
+montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
+5 weight-descent-4.jpg descent-4.jpg wd-4.jpg
+montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
+6 weight-descent-5.jpg descent-5.jpg wd-5.jpg
+montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
+7 weight-descent-6.jpg descent-6.jpg wd-6.jpg
+montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
+8 weight-descent-7.jpg descent-7.jpg wd-7.jpg
+montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
+9 weight-descent-8.jpg descent-8.jpg wd-8.jpg
+montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
+'()
+racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
+10
+racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
+10
+racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
+10
+racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
+0 weight-descent-0.jpg descent-0.jpg wd-0.jpg
+1 weight-descent-0.jpg descent-0.jpg wd-0.jpg
+2 weight-descent-1.jpg descent-1.jpg wd-1.jpg
+3 weight-descent-2.jpg descent-2.jpg wd-2.jpg
+4 weight-descent-3.jpg descent-3.jpg wd-3.jpg
+5 weight-descent-4.jpg descent-4.jpg wd-4.jpg
+6 weight-descent-5.jpg descent-5.jpg wd-5.jpg
+7 weight-descent-6.jpg descent-6.jpg wd-6.jpg
+8 weight-descent-7.jpg descent-7.jpg wd-7.jpg
+9 weight-descent-8.jpg descent-8.jpg wd-8.jpg
+racket@> (make-animation "wd*" 20 "wd.gif")
+WARNING: The convert command is deprecated in IMv7, use "magick" instead of "convert" or "magick convert"
+
+#t
+racket@> (plot-theta-3d line-xs line-ys)
+[image]
+racket@> 
+racket@> (plot-theta-3d line-xs line-ys)
+uv/l2-loss: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1
+  given: 2
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (plot-theta-3d line-xs line-ys)
+[image]
+racket@> (plot-theta-3d line-xs line-ys)
+[image]
+racket@> (plot-theta-3d line-xs line-ys)
+lines3d: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1 plus optional arguments with keywords #:alpha, #:color, #:label, #:style, #:width, #:x-max, #:x-min, #:y-max, #:y-min, #:z-max, and #:z-min
+  given: 2
+  arguments...:
+   '#(0 0 0)
+   '#(0 0 33.21)
+  context...:
+   body of top-level
+   plot-theta-3d
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (plot-theta-3d line-xs line-ys)
+application: procedure does not accept keyword arguments
+  procedure: list
+  arguments...:
+   (renderer3d (vector (ivl 0 4) (ivl -2 2) (ivl -10 200)) #<procedure:...on/plot-element.rkt:72:0> #<procedure:default-ticks-fun> #f #<procedure:.../plot3d/surface.rkt:19:0>)
+   (renderer3d (vector (ivl 0 0) (ivl 0 0) (ivl 33.21 33.21)) #f #f #f #<procedure:...ot3d/decoration.rkt:35:0>)
+   (renderer3d (vector (ivl 0 0) (ivl 0 0) (ivl 0 33.21)) #f #<procedure:default-ticks-fun> #f #<procedure:...ate/plot3d/line.rkt:17:0>)
+   #:altitude 10
+  context...:
+   /Applications/Racket v8.15/collects/racket/private/kw.rkt:1647:4: body of top-level
+   plot-theta-3d
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (plot-theta-3d line-xs line-ys)
+[image]
+racket@> (plot-theta-3d line-xs line-ys)
+[image]
+racket@> (require plot)
+racket@> (plot3d (list (surface3d (λ (x y) (+ (sqr x) (sqr y))) -1 1 -1 1
+                           #:label "z = x² + y²")
+                (surface3d (λ (x y) (- (+ (sqr x) (sqr y)))) -1 1 -1 1
+                           #:color 4 #:line-color 4
+                           #:label "z = -x² - y²")))
+[image]
+racket@> (plot-theta-3d line-xs line-ys)
+[image]
+racket@> (plot3d (list (surface3d (λ (x y) (+ (sqr x) (sqr y))) -1 1 -1 1
+                           #:label "z = x² + y²")
+                (surface3d (λ (x y) (- (+ (sqr x) (sqr y)))) -1 1 -1 1
+                           #:color 4 #:line-color 4
+                           #:label "z = -x² - y²"))
+                 (surface3d (lambda (x y) (((uv/l2-loss uv/line) line-xs line-ys) (vector x y))) #:color 5 #:line-color 5))
+plot3d: arity mismatch;
+ the expected number of arguments does not match the given number
+  expected: 1 plus optional arguments with keywords #:alt, #:altitude, #:angle, #:aspect-ratio, #:az, #:bgcolor, #:fgcolor, #:height, #:legend-anchor, #:lncolor, #:out-file, #:out-kind, #:title, #:width, #:x-label, #:x-max, #:x-min, #:y-label, #:y-max, #:y-min, #:z-label, #:z-max, and #:z-min
+  given: 2
+  arguments...:
+   (list (renderer3d (vector (ivl -1 1) (ivl -1 1) (ivl #f #f)) #<procedure:...on/plot-element.rkt:72:0> #<procedure:default-ticks-fun> #<procedure:.../plot3d/surface.rkt:75:28> #<procedure:.../plot3d/surface.rkt:19:0>) (renderer3d (vector (ivl -1 1) (ivl ...
+   (renderer3d (vector (ivl #f #f) (ivl #f #f) (ivl #f #f)) #<procedure:...on/plot-element.rkt:72:0> #<procedure:default-ticks-fun> #f #<procedure:.../plot3d/surface.rkt:19:0>)
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (plot3d (list (surface3d (λ (x y) (+ (sqr x) (sqr y))) -1 1 -1 1
+                           #:label "z = x² + y²")
+                (surface3d (λ (x y) (- (+ (sqr x) (sqr y)))) -1 1 -1 1
+                           #:color 4 #:line-color 4
+                           #:label "z = -x² - y²")
+                 (surface3d (lambda (x y) (((uv/l2-loss uv/line) line-xs line-ys) (vector x y))) #:color 5 #:line-color 5)))
+[image]
+racket@> (plot-theta-3d line-xs line-ys)
+[image]
+racket@> (plot-theta-3d line-xs line-ys)
+[image]
+racket@> (plot-theta-3d line-xs line-ys)
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(0 0))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+application: not a procedure;
+ expected a procedure that can be applied to arguments
+  given: 0
+  context...:
+   body of top-level
+   plot-theta-3d
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+application: not a procedure;
+ expected a procedure that can be applied to arguments
+  given: 0
+  context...:
+   body of top-level
+   plot-theta-3d
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+application: not a procedure;
+ expected a procedure that can be applied to arguments
+  given: 0
+  context...:
+   body of top-level
+   plot-theta-3d
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+application: not a procedure;
+ expected a procedure that can be applied to arguments
+  given: 0
+  context...:
+   body of top-level
+   plot-theta-3d
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+lines3d: contract violation
+  expected: real?
+  given: '#(1 1 100)
+  in: an element of
+      a part of the or/c of
+      an element of
+      a part of the or/c of
+      the 1st argument of
+      (->*
+       ((or/c
+         natural?
+         (sequence/c
+          (or/c natural? (sequence/c real?)))))
+       (#:alpha
+        (and/c real? nonnegative?)
+        #:color
+        (or/c
+         string?
+         symbol?
+         (and/c
+          exact-integer?
+          negative?
+          (not/c fixnum?))
+         (and/c
+          exact-integer?
+          positive?
+          (not/c fixnum?))
+         (and/c fixnum? negative?)
+         (and/c fixnum? positive? (not/c index?))
+         (and/c index? positive? (not/c byte?))
+         g134
+         1
+         0
+         (recursive-contract g161 #:impersonator)
+         (list/c real? real? real?))
+        #:label
+        (or/c string? #f pict?)
+        #:style
+        (or/c
+         (and/c
+          exact-integer?
+          negative?
+          (not/c fixnum?))
+         (and/c
+          exact-integer?
+          positive?
+          (not/c fixnum?))
+         (and/c fixnum? negative?)
+         (and/c fixnum? positive? (not/c index?))
+         (and/c index? positive? (not/c byte?))
+         g134
+         1
+         0
+         'transparent
+         'solid
+         'dot
+         'long-dash
+         'short-dash
+         'dot-dash)
+        #:width
+        (and/c real? nonnegative?)
+        #:x-max
+        (or/c real? #f)
+        #:x-min
+        (or/c real? #f)
+        #:y-max
+        (or/c real? #f)
+        #:y-min
+        (or/c real? #f)
+        #:z-max
+        (or/c real? #f)
+        #:z-min
+        (or/c real? #f))
+       any)
+  contract from: 
+      <pkgs>/plot-lib/plot/private/plot3d/line.rkt
+  blaming: top-level
+   (assuming the contract is correct)
+  at: <pkgs>/plot-lib/plot/private/plot3d/line.rkt:60:9
+  context...:
+   /Applications/Racket v8.15/collects/racket/contract/private/blame.rkt:350:0: raise-blame-error
+   /Applications/Racket v8.15/share/pkgs/plot-lib/plot/private/common/utils.rkt:21:0: body of top-level
+   .../private/map.rkt:40:19: loop
+   [repeats 1 more time]
+   /Applications/Racket v8.15/share/pkgs/plot-lib/plot/private/plot3d/line.rkt:60:0: lines3d
+   plot-theta-3d
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d line-xs line-ys #(1 1))
+[image]
+racket@> (plot-theta-3d-file line-xs line-ys #(1 1) "tmp.jpg")
