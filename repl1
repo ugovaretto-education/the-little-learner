@@ -1,1549 +1,442 @@
 Welcome to Racket v8.15 [cs].
-racket@> (define ht (hash))
-racket@> ht
-'#hash()
-racket@> (hash-set! ht 1 "one")
-hash-set!: contract violation
-  expected: (and/c hash? (not/c immutable?))
-  given: '#hash()
-  argument position: 1st
-  other arguments...:
-   1
-   "one"
+racket@> (require "uv/calculus.rkt")
+uv/calculus.rkt:5:9: provide: provided identifier is not defined or required
+  at: uv/l2-loss
+  in: (provide uv/sqr uv/line uv/l2-loss uv/line-eq uv/loss-line uv/loss-line-m uv/gradient)
+  location...:
+   uv/calculus.rkt:5:9
+  context...:
+   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/enter.rkt:104:6
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (require "uv/calculus.rkt")
+racket@> (define x (set))
+racket@> x
+(set)
+racket@> (set-add x 4[])
+stdin::189185: #%app: missing procedure expression;
+ probably originally (), which is an illegal empty application
+  in: (#%app)
+  location...:
+   stdin::189185
+  context...:
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (set-add x 4)
+(set 4)
+racket@> x
+(set)
+racket@> (set-add! x 4)
+set-add!:
+expected: (or/c set-mutable? set-weak?)
+given immutable set: (set)
+argument position: 1st
+  context...:
+   /Applications/Racket v8.15/collects/racket/private/set-types.rkt:678:0: body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (length x)
+length: contract violation
+  expected: list?
+  given: (set)
   context...:
    body of top-level
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (hash-set! ht "apple" '(red round))
-hash-set!: contract violation
-  expected: (and/c hash? (not/c immutable?))
-  given: '#hash()
-  argument position: 1st
-  other arguments...:
-   "apple"
-   '(red round)
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (hash-set ht "apple" '(red round))
-'#hash(("apple" . (red round)))
-racket@> ht
-'#hash()
-racket@> (define ht2 (hash-set ht "apple" '(red round)))
-racket@> ht2
-'#hash(("apple" . (red round)))
-racket@> (1 . 3)
-stdin::203264: #%app: bad syntax
-  in: (#%app 1 . 3)
-  location...:
-   stdin::203264
-  context...:
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (cons 1 ('r))
-application: not a procedure;
- expected a procedure that can be applied to arguments
-  given: 'r
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (cons 1 '('r))
-'(1 'r)
-racket@> (const 1 '())
-const: arity mismatch;
- the expected number of arguments does not match the given number
-  expected: 1
-  given: 2
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (cons 1 '())
-'(1)
-racket@> (null? '())
-#t
-racket@> null
-'()
-racket@> null
-'()/
-racket@> (uv-let ((x 1)))
-lambda: bad syntax
-  in: (lambda (x))
-  context...:
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (uv-let ((x 1)
-                  (y 2))
-                 (begin
-                   (displayln x)
-                   (displayln y)))
-1
-2
-racket@> (uv-let ((x 1)
-                  (y 2))
-                 (
-                   (displayln x)
-                   (displayln y)))
-1
-2
-application: not a procedure;
- expected a procedure that can be applied to arguments
-  given: #<void>
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (with-hyper
-          (('h1 10)
-           ('h2 100))
-          (displayln "!"))
-hyper-params: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (with-hyper
-          (('h1 10)
-           ('h2 100))
-          (displayln "!"))
-application: not a procedure;
- expected a procedure that can be applied to arguments
-  given: #<void>
-  context...:
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (with-hyper
-          (('h1 10)
-           ('h2 100))
-          (displayln "!"))
-stdin::498767: lambda: duplicate argument identifier
-  at: quote
-  in: (lambda ((quote h1) (quote h2)) (displayln "!"))
-  location...:
-   stdin::498767
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:672:2: parse-lambda
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (with-hyper
-          (('h1 10)
-           ('h2 100))
-          (displayln "!"))
-stdin::504811: lambda: duplicate argument identifier
-  at: quote
-  in: (lambda ((quote h1) (quote h2)) (displayln "!"))
-  location...:
-   stdin::504811
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:672:2: parse-lambda
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (with-hyper
-          (("1" 10)
-           ("2" 100))
-          (displayln "!"))
-stdin::507670: lambda: not an identifier, identifier with default, or keyword
-  at: "1"
-  in: (lambda ("1" "2") (displayln "!"))
-  location...:
-   stdin::507670
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:672:2: parse-lambda
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (with-hyper
-          (("1" 10)
-           ("2" 100))
-          (displayln "!"))
-stdin::516385: lambda: not an identifier, identifier with default, or keyword
-  at: "1"
-  in: (lambda ("1" "2") (displayln "!"))
-  location...:
-   stdin::516385
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:672:2: parse-lambda
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (with-hyper
-          (("1" 10)
-           ("2" 100))
-          (displayln "!"))
-stdin::523062: lambda: not an identifier, identifier with default, or keyword
-  at: "1"
-  in: (lambda ("1" "2") (displayln "!"))
-  location...:
-   stdin::523062
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:672:2: parse-lambda
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (with-hyper
-          (("1" 10)
-           ("2" 100))
-          (displayln "!"))
-stdin::531340: lambda: not an identifier, identifier with default, or keyword
-  at: "1"
-  in: (lambda ("1" "2") (displayln "!"))
-  location...:
-   stdin::531340
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:672:2: parse-lambda
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (eval h)
-h: undefined;
+racket@> (set-length x)
+set-length: undefined;
  cannot reference an identifier before its definition
   in module: top-level
   context...:
    body of top-level
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (symbol h)
-symbol: undefined;
+racket@> (set-count x)
+0
+racket@> (require "uv/utility.rkt")
+racket@> (sample-sequence 45)
+sample-sequence: undefined;
  cannot reference an identifier before its definition
   in module: top-level
   context...:
    body of top-level
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (gensym h)
-h: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (gensym)
-'g4621
-racket@> (with-hyper
-          ((x 10)
-           (y 100))
-          (displayln "!"))
-!
-racket@> (expand #(with-hyper
-          ((x 10)
-           (y 100))
-          (displayln "!")))
-#<syntax (quote #(with-hyper ((x 10) (y 100)) (displayln "!")))>
-racket@> (with-hyper
-          ((x 10)
-           (y 100))
-          (displayln "!"))
-!
-racket@> (with-hyper
-          ((x 10)
-           (y 100))
-          (displayln "!"))
-!
-racket@> hyper-params
-'#hash((h1 . 10) (h2 . 100) ("1" . 10) ("2" . 100) ("k" . "value"))
-racket@> (hash-clear hyper-params)
-'#hash()
-racket@> hyper-params
-'#hash((h1 . 10) (h2 . 100) ("1" . 10) ("2" . 100) ("k" . "value"))
-racket@> (set! hyper-params #hash())
-racket@> hyper-params
-'#hash()
+racket@> (define sample-sequence
+  (lambda (size)
+    (set->list (sampled-sequence n (set)))))
+
+(define sampled-sequence
+  (lambda (size acc)
+    (if (= (set-count acc) size)
+        (acc)
+        (sampled-sequence (- n 1) (set-add acc (random size))))))
+
+racket@> racket@> 
 racket@> 
-racket@> (eval 'h)
-h: undefined;
+racket@> (sample-sequence 4)
+n: undefined;
  cannot reference an identifier before its definition
   in module: top-level
   context...:
    body of top-level
-   [repeats 1 more time]
+   stdin::364597: sample-sequence
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (eval '(set! h 3))
-set!: assignment disallowed;
- cannot set variable before its definition
-  variable: h
-  in module: top-level
-  context...:
-   body of top-level
-   [repeats 1 more time]
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (declare-hype rev)
-racket@> rev
-'()
-racket@> (with-hyper
-          ((rev 10)))
-racket@> rev
-10
-racket@> (with-hyper
-          ((rev 10))
-          (displayln rev))
-10
+racket@> (define sample-sequence
+  (lambda (size)
+    (set->list (sampled-sequence size (set)))))
+
+(define sampled-sequence
+  (lambda (size acc)
+    (if (= (set-count acc) size)
+        (acc)
+        (sampled-sequence size (set-add acc (random size))))))
+
+racket@> racket@> 
+racket@> (sample-sequence 4)
 application: not a procedure;
  expected a procedure that can be applied to arguments
-  given: #<void>
+  given: (set 0 1 2 3)
   context...:
    body of top-level
+   stdin::383034: sample-sequence
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (with-hyper
-          ((rev 10))
-          (displayln rev))
-10
-racket@> (require plot)
-racket@> (parameterize ([plot-title  "An R × R → R function"]
-                 [plot-x-label "x"]
-                 [plot-y-label "y"]
-                 [plot-z-label "cos(x) sin(y)"])
-    (plot3d (contour-intervals3d (λ (x y) (* (cos x) (sin y)))
-                                 (- pi) pi (- pi) pi)))
-[imagev
-racket@> (grad-descent-and-plot-line line-xs line-ys 100)
-[image]
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-[image]
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-[image]
-racket@> [image]  M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-uv/gradient: arity mismatch;
+racket@> (define sample-sequence
+  (lambda (size)
+    (set->list (sampled-sequence size (set)))))
+
+(define sampled-sequence
+  (lambda (size acc)
+    (if (= (set-count acc) size)
+        acc
+        (sampled-sequence size (set-add acc (random size))))))
+
+racket@> racket@> (sample-sequence 4)
+'(3 2 1 0)
+racket@> (sample-sequence 10)
+'(9 8 7 6 5 4 3 2 1 0)
+racket@> (define sample-sequence
+  (lambda (size max-index)
+    (set->list (sampled-sequence size max-inded (set)))))
+
+(define sampled-sequence
+  (lambda (size acc)
+    (if (= (set-count acc) size)
+        acc
+        (sampled-sequence size (set-add acc (random max-index))))))
+
+racket@> racket@> 
+racket@> (sample-sequence 4 500)
+max-inded: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   stdin::427714: sample-sequence
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define sample-sequence
+  (lambda (size max-index)
+    (set->list (sampled-sequence size max-index (set)))))
+
+(define sampled-sequence
+  (lambda (size max-index acc)
+    (if (= (set-count acc) size)
+        acc
+        (sampled-sequence size (set-add acc (random max-index))))))
+
+racket@> racket@> 
+racket@> (define sample-sequence
+  (lambda (size max-index)
+    (set->list (sampled-sequence size max-index (set)))))
+
+(define sampled-sequence
+  (lambda (size max-index acc)
+    (if (= (set-count acc) size)
+        acc
+        (sampled-sequence size (set-add acc (random max-index))))))
+
+racket@> racket@> 
+racket@> (sample-sequence 4 500)
+sampled-sequence: arity mismatch;
  the expected number of arguments does not match the given number
-  expected: 1
+  expected: 3
   given: 2
   context...:
-   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:24:2: body of top-level
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:787:29: grad-descent-and-plot-line
+   stdin::439934: body of top-level
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-uv/gradient: arity mismatch;
+racket@> (sample-sequence 4 500)
+sampled-sequence: arity mismatch;
  the expected number of arguments does not match the given number
-  expected: 1
+  expected: 3
   given: 2
   context...:
-   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:24:2: body of top-level
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:787:29: grad-descent-and-plot-line
+   stdin::439934: body of top-level
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-uv/grad-descent: arity mismatch;
- the expected number of arguments does not match the given number
-  expected: 4
-  given: 3
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:787:29: body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-uv/grad-descent: arity mismatch;
- the expected number of arguments does not match the given number
-  expected: 4
-  given: 3
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:787:29: body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-uv/grad-descent: arity mismatch;
- the expected number of arguments does not match the given number
-  expected: 4
-  given: 3
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:787:29: body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-uv/grad-descent: arity mismatch;
- the expected number of arguments does not match the given number
-  expected: 4
-  given: 3
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:787:29: body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-grad-descent-and-plot-line: undefined;
+racket@> (define sample-sequence
+  (lambda (size max-index)
+    (set->list (sampled-sequence size max-index (set)))))
+
+(define sampled-sequence
+  (lambda (size max-index acc)
+    (if (= (set-count acc) size)
+        acc
+        (sampled-sequence size max-index (set-add acc (random max-index))))))
+
+racket@> racket@> 
+racket@> 
+racket@> (sample-sequence 4 500)
+'(374 6 471 50)
+racket@> (for-each (lambda (i x y) (vector-set! y i (vector-ref x i))) idx v1 v2) 
+idx: undefined;
  cannot reference an identifier before its definition
   in module: top-level
   context...:
    body of top-level
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-[image]
-racket@> [image]  M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-application: procedure does not expect an argument with given keyword
-  procedure: function
-  given keyword: #:file-name
-  arguments...:
-   #<procedure:...ner/uv/calculus.rkt:33:4>
-   0.9
-   4.1
-   #:color 'red
-   #:file-name ""
-   #:label "#(1.049999362456866 1.8748891328357331e-6)"
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:1647:4: body of top-level
-   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/plot.rkt:43:2: line-scatter-plot
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-application: procedure does not expect an argument with given keyword
-  procedure: function
-  given keyword: #:file-name
-  arguments...:
-   #<procedure:...ner/uv/calculus.rkt:33:4>
-   0.9
-   4.1
-   #:color 'red
-   #:file-name '()
-   #:label "#(1.049999362456866 1.8748891328357331e-6)"
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:1647:4: body of top-level
-   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/plot.rkt:43:2: line-scatter-plot
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-application: procedure does not expect an argument with given keyword
-  procedure: function
-  given keyword: #:file-name
-  arguments...:
-   #<procedure:...ner/uv/calculus.rkt:33:4>
-   0.9
-   4.1
-   #:color 'red
-   #:file-name '()
-   #:label "#(1.049999362456866 1.8748891328357331e-6)"
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:1647:4: body of top-level
-   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/plot.rkt:43:2: line-scatter-plot
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-application: procedure does not expect an argument with given keyword
-  procedure: function
-  given keyword: #:file-name
-  arguments...:
-   #<procedure:...ner/uv/calculus.rkt:33:4>
-   0.9
-   4.1
-   #:color 'red
-   #:file-name '()
-   #:label "#(1.049999362456866 1.8748891328357331e-6)"
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:1647:4: body of top-level
-   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/plot.rkt:43:2: line-scatter-plot
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@>    /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/plot.rkt:43:2: line-scatter-plot  M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-application: procedure does not expect an argument with given keyword
-  procedure: function
-  given keyword: #:out-tile
-  arguments...:[]
-   #<procedure:...ner/uv/calculus.rkt:33:4>
-   0.9
-   4.1
-   #:color 'red
-   #:label "#(1.049999362456866 1.8748891328357331e-6)"
-   #:out-tile '()
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:1647:4: body of top-level
-   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/plot.rkt:43:2: line-scatter-plot
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-application: procedure does not expect an argument with given keyword
-  procedure: plot
-  given keyword: #:out-tile
-  arguments...:
-   (list (renderer2d (vector (ivl 0.9 4.1) (ivl 1.0999999999999999 4.3)) #f #<procedure:default-ticks-fun> #f #<procedure:...te/plot2d/point.rkt:27:0>) (renderer2d (vector (ivl 0.9 4.1) (ivl #f #f)) #<procedure:...on/plot-element.rkt:46:0> #<procedure:defa...
-   #:out-tile '()
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:1647:4: body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000)
-plot: contract violation
-  expected: #f, path-string or output port for #:out-file
-  given: '()
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/share/pkgs/plot-gui-lib/plot/private/gui/plot2d.rkt:206:0: plot
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000 #(0 0) 0.01 "out.png")
-[image]
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000 #(0 0) 0.01 "out.png")
-[image]
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000 #(0 0) 0.01 "out.png")
-[image]
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000 #(0 0) 0.01 "out.png")
-[image]
-racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000 #(0 0) 0.01 "out.png")
-[image]
-racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000 #(0 0) 0.01 "out.png")
-[image]
-racket@> (require "uv/vector.rkt")
-racket@> (norm #(2 2))
-2.8284271247461903
-racket@> (norm #(1 1))
-1.4142135623730951
-racket@> (norm #(1 1))  M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000 #(0 0) 0.01 "out.png")
-grad-descent-and-plot-line: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (grad-descent-and-plot-line line-xs line-ys 1000 #(0 0) 0.01 "out.png")
-#(1.0499993693957599 1.85268467234323e-6)
-#(1.049999362456866 1.8748891328357331e-6)
-[image]
-racket@> [image]  M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 10000 #(0 0) 0.01 "out.png")
-#(1.0499993693957599 1.85268467234323e-6)
-#(1.049999362456866 1.8748891328357331e-6)
-0
-[image]
-racket@> (grad-descent-and-plot-line line-xs line-ys 10000 #(0 0) 0.01 "out.png")
-#(1.0499998093216334 5.564992910933597e-7)
-#(1.0499998093216334 5.620504062164855e-7)
-8899
-[image]
-racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 10000 #(0 0) 0.01 "out.png")
-#(0.6299998744907498 0.21000019501116185)
-#(0 0)
-10000
-[image]
-racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 10000 #(0 0) 0.01 "out.png")
-#(1.04999909600334 2.65898414397725e-6)
-#(1.0499990862888886 2.690903055935223e-6)
-9030
-[image]
-racket@> [image]  M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 10000 #(0 0) 0.01 "out.png")
-#(1.04999909600334 2.65898414397725e-6)
-#(1.0499990862888886 2.690903055935223e-6)
-9030
-norm: arity mismatch;
- the expected number of arguments does not match the given number
-  expected: 1
-  given: 2
-  context...:
-   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:14:2: body of top-level
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:787:29: grad-descent-and-plot-line
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (grad-descent-and-plot-line line-xs line-ys 10000 #(0 0) 0.01 "out.png")
-#(1.04999909600334 2.65898414397725e-6)
-#(1.0499990862888886 2.690903055935223e-6)
-9030
-norm: arity mismatch;
- the expected number of arguments does not match the given number
-  expected: 1
-  given: 2
-  context...:
-   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:14:2: body of top-level
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:787:29: grad-descent-and-plot-line
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line line-xs line-ys 10000 #(0 0) 0.01 "out.png")
-#(1.04999909600334 2.65898414397725e-6)
-#(1.0499990862888886 2.690903055935223e-6)
-9030
-9.714370197144717e-9
-[image]
-racket@> (grad-descent-and-plot-line line-xs line-ys 200 #(0 0) 0.01 "out.png")
-#(1.040334624002881 0.028417387887280654)
-#(1.0402174718815438 0.028761829029555486)
-0
-0.00010764529809925705
-[image]
-racket@> (plot-new-window? #t)
-racket@> (grad-descent-and-plot-line line-xs line-ys 200 #(0 0) 0.01 "out.png")
-#(1.040334624002881 0.028417387887280654)
-#(1.0402174718815438 0.028761829029555486)
-0
-0.00010764529809925705
-2025-03-05 19:46:17.779 racket[71383:15296887] +[IMKClient subclass]: chose IMKClient_Modern
-2025-03-05 19:46:17.779 racket[71383:15296887] +[IMKInputSession subclass]: chose IMKInputSession_Modern
-racket@> (exp 3)
-20.085536923187668
-racket@> (exp (* -0.04 2000))
-         
-1.8048513878454153e-35
-racket@> (exp (* (- 0 (sqr 0.04)) 2000))
-         
-0.04076220397836621
-racket@> (for-each '(1 3 4) (lambda (x) (*2 x)))
+racket@> (define idx '(2 1 0))
+racket@> (define v1 (vector 10 20 30))
+racket@> (define v2 (make-vector 3))
+racket@> (for-each (lambda (i x y) (vector-set! y i (vector-ref x i))) idx v1 v2) 
 for-each: contract violation
-  expected: procedure?
-  given: '(1 3 4)
+  expected: list?
+  given: '#(10 20 30)
   context...:
    body of top-level
    /Applications/Racket v8.15/collects/racket/private/map.rkt:267:2: gen-for-each
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (for-each (lambda (x) (*2 x)) '(1 2 3))
-*2: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
+racket@> (for-each (lambda (i x y) (vector-set! y i (vector-ref x i))) idx (list v1 v1 v1) 
+                   (list v2 v2 v2))
+racket@> v2
+'#(10 20 30)
+racket@> (define v (vector))
+racket@> (vector-append v 3)
+vector-append: contract violation
+  expected: vector?
+  given: 3
   context...:
    body of top-level
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (for-each (lambda (x) (* 2 x)) '(1 2 3))
-racket@> (require plot)
+racket@> (vector-append 3 v)
+vector-append: contract violation
+  expected: vector?
+  given: 3
+  context...:
+   body of top-level
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (vector-append v (vector 3))
+'#(3)
+racket@> v
+'#()
+racket@> (make-list 4 (vector))
+'(#() #() #() #())
+racket@> (define extract-sub-vectors
+  (lambda (indices xs)
+    (extracted indices xs (make-list (length xs) (vector))))) ;;xs is a list of vector
 
-(define ((make-current-value-renderer fn) snip event x y)
-  (define overlays
-    (and x y (eq? (send event get-event-type) 'motion)
-         (list (vrule x #:style 'long-dash)
-               (point-label (vector x (fn x)) #:anchor 'auto))))
-  (send snip set-overlay-renderers overlays))
+(define extracted
+  (lambda (indices xs acc)
+    (if (empty? indices)
+        acc
+        (let ((i (car indices)))
+          (for-each (lambda (xs ys) (vector-append! ys (vector-ref xs i))) xs acc)
+          (extracted (cdr indices) xs acc)))))
 
-(define snip (plot-snip (function sin) #:x-min 0 #:x-max (* 2 pi) #:y-min -1.5 #:y-max 1.5))
-(send snip set-mouse-event-callback (make-current-value-renderer sin))
-snip
-racket@> racket@> racket@> racket@> [image]
-racket@> (plot-new-window? #t)
-racket@> (require plot)
-
-(define ((make-current-value-renderer fn) snip event x y)
-  (define overlays
-    (and x y (eq? (send event get-event-type) 'motion)
-         (list (vrule x #:style 'long-dash)
-               (point-label (vector x (fn x)) #:anchor 'auto))))
-  (send snip set-overlay-renderers overlays))
-
-(define snip (plot-snip (function sin) #:x-min 0 #:x-max (* 2 pi) #:y-min -1.5 #:y-max 1.5))
-(send snip set-mouse-event-callback (make-current-value-renderer sin))
-snip
-racket@> racket@> racket@> racket@> [image]
-racket@> snip
-[image]
-racket@> (require plot)
-
-(define a (* 10 (/ pi 3))) ; angle at which we draw the line and sine function
-
-(plot (list
-       (axes)
-       (polar (lambda (theta) 1))
-       (lines (list (vector 0 (sin a)) (vector (cos a) (sin a))))
-       (lines (list (vector (cos a) 0) (vector (cos a) (sin a))))
-       (lines (list (vector 0 0) (vector (cos a) (sin a))))
-       (polar-label (lambda (theta) 1) a "")
-       (point-label (vector 0 (sin a)) "")
-       (function (lambda (x) (sin (+ a x))) 0 (* 2 pi)))
-      #:height (exact-round (* 100 2))
-      #:width (exact-round (* 100 (+ 1 (* 2 pi)))))
-racket@> racket@> racket@> (remainder 3 2)
-1
-racket@> 
-racket@> (require image)
-stdin::1041530: collection not found
-  for module path: image
-  collection: "image"
-  in collection directories:
-   /Users/ugo/projects/ugovaretto-education/the-little-learner
-   /Users/ugo/Library/Racket/8.15/collects
-   /Applications/Racket v8.15/collects/
-   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src
-   ... [183 additional linked and package directories]
+racket@> racket@> ()
+stdin::1164286: #%app: missing procedure expression;
+ probably originally (), which is an illegal empty application
+  in: (#%app)
   location...:
-   stdin::1041530
+   stdin::1164286
   context...:
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (require htdp/image)
-racket@> (bitmap "./out.png")
-bitmap: undefined;
+racket@> (define v1 (vector 1 2 3 4 5))
+racket@> (define v2 (vector 6 7 8 1 3))
+racket@> (define indices '(3 2 0))
+racket@> (extract-sub-vectors indices (list v1 v2))
+vector-append!: undefined;
+ cannot reference an identifier before its definition
+  in module: top-level
+  context...:
+   body of top-level
+   stdin::1164051: extracted
+   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
+racket@> (define vector-append!
+  (lambda (v e)
+    (set! v (vector-append v (vector e)))))
+racket@> (define extract-sub-vectors
+  (lambda (indices xs)
+    (extracted indices xs (make-list (length xs) (vector))))) ;;xs is a list of vector
+
+(define extracted
+  (lambda (indices xs acc)
+    (if (empty? indices)
+        acc
+        (let ((i (car indices)))
+          (for-each (lambda (xs ys) (vector-append! ys (vector-ref xs i))) xs acc)
+          (extracted (cdr indices) xs acc)))))
+
+racket@> racket@> (extract-sub-vectors indices (list v1 v2))
+'(#() #())
+racket@> (define i 2)
+racket@> (for-each (lambda (xs ys) (vector-append! ys (vector-ref xs i))) 
+                   (list v1 v2) (li
+                                 )
+                   )
+li: undefined;
  cannot reference an identifier before its definition
   in module: top-level
   context...:
    body of top-level
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (bit "./out.png")  M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (require htdp/image)
-racket@> (require pict racket/draw)
-racket@> (define b (make-object bitmap% "out.png"))
-racket@> (scale (bitmap 0.2))
-bitmap: contract violation
-  expected: (or/c path-string? (is-a?/c bitmap%) pict-convertible? convertible?)
-  given: 0.2
-  in: the 1st argument of
-      (->
-       (or/c
-        path-string?
-        (is-a?/c bitmap%)
-        pict-convertible?
-        convertible?)
-       pict?)
-  contract from: 
-      <pkgs>/pict-lib/pict/private/utils.rkt
-  blaming: top-level
-   (assuming the contract is correct)
-  at: <pkgs>/pict-lib/pict/private/utils.rkt:118:4
-  context...:
-   /Applications/Racket v8.15/collects/racket/contract/private/blame.rkt:350:0: raise-blame-error
-   /Applications/Racket v8.15/collects/racket/contract/private/arrow-val-first.rkt:486:18
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (scale (bitmap b) 0.2)
-[image]
-racket@> (send (bitmap b) save-file "anotherfile.jpg")
-send: target is not an object
-  target: #<pict>
-  method name: save-file
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/class-internal.rkt:4730:0: body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (send b save-file "anotherfile.jpg")
-save-file: contract violation
-  received: 2 arguments
-  expected: 2 or 3 non-keyword arguments
-  in: the save-file method in
-      bitmap%/c
-  contract from: 
-      <pkgs>/draw-lib/racket/draw.rkt
-  contract on: bitmap%
-  blaming: top-level
-   (assuming the contract is correct)
-  at: <pkgs>/draw-lib/racket/draw.rkt:97:19
-  context...:
-   /Applications/Racket v8.15/collects/racket/contract/private/blame.rkt:350:0: raise-blame-error
-   /Applications/Racket v8.15/collects/racket/contract/private/arrow-higher-order.rkt:522:11: basic-checker-name
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> 
-racket@> b
-[image]
-racket@> (send b ok?)
-#t
-racket@> (sen b save-file "tmp.jpg" 'jpeg)
-sen: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (send b save-file "tmp.jpg" 'jpeg)
-#t
-racket@> (string-length "ccc")
-3
-racket@> (cons "a" "a")
-'("a" . "a")
-racket@> (string-append "aaa" "b")
-"aaab"
-racket@> (string-fill "d" 10)
-string-fill: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (string-fill! "d" 10)
-string-fill!: contract violation
-  expected: mutable-string?
-  given: "d"
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (define s (make-string "aa"))
-make-string: contract violation
-  expected: exact-nonnegative-integer?
-  given: "aa"
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (define s  "aa")
-racket@> (string-fill! s "0" 10)
-string-fill!: arity mismatch;
+racket@> (define out (list (vector) (vector)))
+racket@> (for-each (lambda (xs ys) (vector-append! ys (vector-ref xs i))) 
+                   (list v1 v2) out)
+racket@> out
+'(#() #())
+racket@> (define vv (vector))
+racket@> (vector-append! v 4)
+racket@> v
+'#()
+racket@> vv
+'#()
+racket@> (set! vv (vector-append vv (vector 3)))
+racket@> vv
+'#(3)
+racket@> (define vector-append!
+  (lambda (v e)
+    (let ((v (vector-append v (vector e))))
+      v)))
+
+racket@> (vector-append! vv 5)
+'#(3 5)
+racket@> (for-each (lambda (xs ys) (vector-append! ys (vector-ref xs i))) 
+                   (list v1 v2) out)
+racket@> out
+'(#() #())
+racket@> vv
+'#(3)
+racket@> (for-each (lambda (xs ys) (set! ys (vector-append ys (vector (vector-ref xs i))))) 
+                   (list v1 v2) out)
+racket@> out
+'(#() #())
+racket@> (map (lambda (xs ys) (vector-append ys (vector (vector-ref xs i)))) 
+                   (list v1 v2) out)
+'(#(3) #(8))
+racket@> (define extract-sub-vectors
+  (lambda (indices xs)
+    (extracted indices xs (make-list (length xs) (vector))))) ;;xs is a list of vector
+
+(define extracted
+  (lambda (indices vs acc)
+    (if (empty? indices)
+        acc
+        (let ((i (car indices))
+              (a (map (lambda (xs ys)
+                        (vector-append ys
+                                       (vector
+                                        (vector-ref xs i)))) vs acc)))
+          (extracted (cdr indices) vs a)))))
+
+racket@> racket@> 
+racket@> (extract-sub-vectors indices v1 v2)
+extract-sub-vectors: arity mismatch;
  the expected number of arguments does not match the given number
   expected: 2
   given: 3
   context...:
    body of top-level
    /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (string-fill! s "0")
-string-fill!: contract violation
-  expected: mutable-string?
-  given: "aa"
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (define num-digits
-  (lambda (n)
-    (if (< n 10)
-        1
-        (+ (1 (num-digits (/ n 10)))))))
-racket@> (num-digits 12456)
-application: not a procedure;
- expected a procedure that can be applied to arguments
-  given: 1
-  context...:
-   body of top-level
-   stdin::559039: num-digits
-   [repeats 3 more times]
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (define num-digits
-  (lambda (n)
-    (if (< n 10)
-        1
-        (+ (1 num-digits (/ n 10))))))
-racket@> (num-digits 12456)
-application: not a procedure;
- expected a procedure that can be applied to arguments
-  given: 1
-  context...:
-   body of top-level
-   stdin::585805: num-digits
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (define num-digits
-  (lambda (n)
-    (if (< n 10)
-        1
-        (+ 1 num-digits (/ n 10)))))
-racket@> (num-digits 12456)
-+: contract violation
-  expected: number?
-  given: #<procedure:num-digits>
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (define num-digits
-  (lambda (n)
-    (if (< n 10)
-        1
-        (+ 1 (num-digits (/ n 10))))))
-racket@> (num-digits 12456)
-5
-racket@> (make-string 10)
-"\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
-racket@> (define pad
-  (lambda (num c n)
-    (let ((d (num-digits num))
-          (pad (make-string (+ l (- n l)))))
-      (begin
-        (string-fill! pad (number->string n))
-        (string-append pad (number-string num))))))
+racket@> (extract-sub-vectors indices (list v1 v2))
+'(#(3 3 3) #(8 8 8))
+racket@> (define extract-sub-vectors
+  (lambda (indices xs)
+    (extracted indices xs (make-list (length xs) (vector))))) ;;xs is a list of vector
 
-racket@> (pad 73 1 4))
-l: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   stdin::837229: pad
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> stdin::841323: read-syntax: unexpected `)`
-  context...:
-   /Users/ugo/.config/emacs/elpa/geiser-racket-20210421.125/src/geiser/user.rkt:89:0
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (define pad
-  (lambda (num n)
-    (let ((d (num-digits num))
-          (pad (make-string n)))
-      (begin
-        (string-fill! pad (number->string n))
-        (string-append pad (number-string num))))))
-racket@> (pad 74 5)
-string-fill!: contract violation
-  expected: char?
-  given: "5"
-  context...:
-   stdin::864656: body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (define pad
-  (lambda (num c n)
-    (let ((d (num-digits num))
-          (pad (make-string (- n d))))
-      (begin
-        (string-fill! pad (number->string c))
-        (string-append pad (number-string num))))))
+(define extracted
+  (lambda (indices vs acc)
+    (if (empty? indices)
+        acc
+        (let ((i (car indices))
+              (a (map (lambda (xs ys)
+                        (vector-append ys
+                                       (vector
+                                        (vector-ref xs i)))) vs acc)))
+          (begin
+            (displayln i)
+            (extracted (cdr indices) vs a))))))
 
-racket@> (pad 74 "0" 5)
-d: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   stdin::918112: pad
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (define pad
-  (lambda (num c n)
-    (let* ((d (num-digits num))
-          (pad (make-string (- n d))))
-      (begin
-        (string-fill! pad (number->string c))
-        (string-append pad (number-string num))))))
-
-racket@> (pad 74 "0" 5)
-number->string: contract violation
-  expected: number?
-  given: "0"
-  context...:
-   stdin::931350: body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (pad 74 0 5)
-string-fill!: contract violation
-  expected: char?
-  given: "0"
-  context...:
-   stdin::931350: body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (integer->)(define pad
-  (lambda (num c n)
-    (let* ((d (num-digits num))
-          (pad (make-string (- n d))))
-      (begin
-        (string-fill! pad (integer->char c))
-        (string-append pad (number-string num))))))
-
-integer->: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> racket@> (pad 74 0 5)
-number-string: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   stdin::999346: pad
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (integer->)(define pad
-  (lambda (num c n)
-    (let* ((d (num-digits num))
-          (pad (make-string (- n d))))
-      (begin
-        (string-fill! pad (integer->char c))
-        (string-append pad (number->string num))))))
-
-integer->: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> racket@> (pad 74 0 5)
-"\u0000\u0000\u000074"
-racket@> (string-length (pad 74 0 5))
-5
-racket@> (define pad
-  (lambda (num c n)
-    (do ((i 0 (+ 1 i))
-         (d (num-digits num))
-         (padded (number->string num) (format "~a~a" c padded)))
-      ((= i (- (n d))) padded))))
-
-racket@> (pad 74 0 5)
-application: not a procedure;
- expected a procedure that can be applied to arguments
-  given: 5
-  context...:
-   body of top-level
-   stdin::1189970: doloop
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (define pad
-  (lambda (num c n)
-    (do ((i 0 (+ 1 i))
-         (d (num-digits num))
-         (padded (number->string num) (format "~a~a" c padded)))
-      ((= i (- n d)) padded))))
-
-racket@> (pad 74 0 5)
-"00074"
-racket@> (pad 74 "-+" 5)
-"-+-+-+74"
-racket@> "\u0000\u0000\u000074"  M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-uv/grad-descent-log: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:787:29: grad-descent-and-plot-line-anim
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-uv/grad-descent-log: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:787:29: grad-descent-and-plot-line-anim
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-uv/grad-descent-line-log: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:787:29: grad-descent-and-plot-line-anim
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-uv/revise: arity mismatch;
- the expected number of arguments does not match the given number
-  expected: 3
-  given: 4
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-uv/revise: arity mismatch;
- the expected number of arguments does not match the given number
-  expected: 3
-  given: 4
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-racket@> (file->list ".")
-open-input-file: cannot open input file
-  path: /Users/ugo/projects/ugovaretto-education/the-little-learner/.
-  system error: path refers to a directory; rkt_err=9
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/private/kw-file.rkt:125:2: call-with-input-file*
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (directory-list)
-'(#<path:.DS_Store>
-  #<path:.emacs.desktop>
-  #<path:.git>
-  #<path:.gitignore>
-  #<path:README.markdown>
-  #<path:Scheme Macros III_ Defining let _ Veit's Blog.pdf>
-  #<path:ll1.rkt>
-  #<path:optimized-line.jpg>
-  #<path:out.png>
-  #<path:repl1>
-  #<path:repl1~>
-  #<path:tmp.jpg>
-  #<path:uv>)
-racket@> (directory-list "./uv")
-'(#<path:#tmp-test.rkt#>
-  #<path:#utility.rkt#>
-  #<path:.#utility.rkt>
-  #<path:calculus.rkt>
-  #<path:calculus.rkt~>
-  #<path:optimization.rkt>
-  #<path:optimization.rkt~>
-  #<path:plot.rkt>
-  #<path:tensor.rkt>
-  #<path:tmp-test.rkt>
-  #<path:utility.rkt>
-  #<path:utility.rkt~>
-  #<path:vector.rkt>
-  #<path:vector.rkt~>)
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-racket@> 
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-racket@>   #<path:tensor.rkt>  M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@>   #<path:utility.rkt>  M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-0
-0 #(0 0)
-line-scatter-plot-file: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:38:2: uv/revise-log
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> Welcome to Racket v8.15 [cs].  M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-0
-0 #(0 0)
-format: format string requires 1 arguments, given 2; arguments were: '#(0 0) "descent--0.gif"
-  context...:
-   body of top-level
-   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:38:2: uv/revise-log
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-0
-0 #(0 0)
-detect-image-file-type: "descent-0.gif" has unknown file type
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/share/pkgs/plot-lib/plot/private/no-gui/plot2d.rkt:171:0: plot-file
-   /Users/ugo/projects/ugovaretto-education/the-little-learner/uv/optimization.rkt:38:2: uv/revise-log
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-0
-0 #(0 0)
-1
-1 #(0.6299998744907498 0.21000019501116185)
+racket@> racket@> 
+racket@> (extract-sub-vectors indices (list v1 v2))
+3
 2
-2 #(0.8399999362751487 0.27720024053934367)
+0
+'(#(3 3 3) #(8 8 8))
+racket@> (define extract-sub-vectors
+  (lambda (indices xs)
+    (extracted indices xs (make-list (length xs) (vector))))) ;;xs is a list of vector
+
+(define extracted
+  (lambda (indices vs acc)
+    (if (empty? indices)
+        acc
+        (let ((i (car indices))
+              (a (map (lambda (xs ys)
+                        (vector-append ys
+                                       (vector
+                                        (vector-ref xs i)))) vs acc)))
+          (begin
+            (displayln i)
+            (displayln acc)
+            (extracted (cdr indices) vs a))))))
+
+racket@> racket@> (extract-sub-vectors indices (list v1 v2))
 3
-3 #(0.9105599385605956 0.29702423853805726)
-4
-4 #(0.9348191304381359 0.3011503130201376)
-5
-5 #(0.9436975895171784 0.3000944617803647)
-6
-6 #(0.9474601436743058 0.2973473856027198)
-7
-7 #(0.9495145808502414 0.29406756474337215)
-8
-8 #(0.9509923196149295 0.2906392432278082)
-9
-9 #(0.9522690816443635 0.2871896387368622)
-'#(0.9534697045787688 0.2837606510874835)
-racket@>   M-x g e i s e r - r e p l - r e s t a r t - r e p l RET
-It's been nice interacting with you!
-Press C-c C-z to bring me back.
-Welcome to Racket v8.15 [cs].
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-'#(0.9534697045787688 0.2837606510874835)
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-'#(0.9534697045787688 0.2837606510874835)
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-" #(0 0) 0.01)
-'#(0.47102997058345863 0.15595380986610508)
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-" #(0 0) 0.01)
-'#(0.9534697045787688 0.2837606510874835)
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-" #(0 0) 0.005)
-'#(0.9313185979353822 0.2959449574291284)
-racket@> (plot-loss-weights line-xs line-ys ws 'blue 'red)
-ws: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (plot-loss-weights line-xs line-ys weights 'blue 'red)
-[image]
-racket@> (plot-loss-weights line-xs line-ys weights 'blue 'red)
-line-y: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   plot-loss-weights
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (plot-loss-weights line-xs line-ys weights 'blue 'red)
-line-y: undefined;
- cannot reference an identifier before its definition
-  in module: top-level
-  context...:
-   body of top-level
-   plot-loss-weights
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (plot-loss-weights line-xs line-ys weights 'blue 'red)
-[image]
-racket@> (plot-loss-weights line-xs line-ys weights 'blue 'red)
-[image]
-racket@> (plot-loss-weight-file line-xs line-ys 1 "weight-loss.jpg")
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-'#(0.9534697045787688 0.2837606510874835)
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-'#(0.9534697045787688 0.2837606510874835)
-racket@> (make-animation "weight*" "weights.gif")
-WARNING: The convert command is deprecated in IMv7, use "magick" instead of "convert" or "magick convert"
+(#() #())
+2
+(#(3) #(8))
+0
+(#(3 3) #(8 8))
+'(#(3 3 3) #(8 8 8))
+racket@> (define extract-sub-vectors
+  (lambda (indices xs)
+    (extracted indices xs (make-list (length xs) (vector))))) ;;xs is a list of vector
 
-convert: invalid argument for option '-delay': weight-descent-0 @ error/deprecate.c/ConvertImageCommand/1316.
-#f
-racket@> (grad-descent-and-plot-line-anim line-xs line-ys 10 "descent-")
-'#(0.9534697045787688 0.2837606510874835)
-racket@> (make-animation "weight*" "weights.gif")
-WARNING: The convert command is deprecated in IMv7, use "magick" instead of "convert" or "magick convert"
+(define extracted
+  (lambda (indices vs acc)
+    (if (empty? indices)
+        acc
+        (let* ((i (car indices))
+              (a (map (lambda (xs ys)
+                        (vector-append ys
+                                       (vector
+                                        (vector-ref xs i)))) vs acc)))
+          (begin
+            (displayln i)
+            (displayln acc)
+            (extracted (cdr indices) vs a))))))
 
-convert: invalid argument for option '-delay': weight-descent-0.jpg @ error/deprecate.c/ConvertImageCommand/1316.
-#f
-racket@> (make-animation "weight*" 20 "weights.gif")
-make-animation: arity mismatch;
- the expected number of arguments does not match the given number
-  expected: 2
-  given: 3
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (make-animation "weight*" 20 "weights.gif")
-WARNING: The convert command is deprecated in IMv7, use "magick" instead of "convert" or "magick convert"
+racket@> racket@> (extract-sub-vectors indices (list v1 v2))
+3
+(#() #())
+2
+(#(4) #(1))
+0
+(#(4 3) #(1 8))
+'(#(4 3 1) #(1 8 6))
+racket@> (define extract-sub-vectors
+  (lambda (indices xs)
+    (extracted indices xs (make-list (length xs) (vector))))) ;;xs is a list of vector
 
-#t
-racket@> (make-animation "weight*" 20 "weights.gif")
-WARNING: The convert command is deprecated in IMv7, use "magick" instead of "convert" or "magick convert"
+(define extracted
+  (lambda (indices vs acc)
+    (if (empty? indices)
+        acc
+        (let* ((i (car indices))
+              (a (map (lambda (xs ys)
+                        (vector-append ys
+                                       (vector
+                                        (vector-ref xs i)))) vs acc)))
+            (extracted (cdr indices) vs a)))))
 
-#t
-racket@> (make-animation "weight*" 20 "weights.gif")
-WARNING: The convert command is deprecated in IMv7, use "magick" instead of "convert" or "magick convert"
-
-#t
+racket@> racket@> (extract-sub-vectors indices (list v1 v2))
+'(#(4 3 1) #(1 8 6))
+racket@> (extract-sub-vectors (sample-sequence 3 5) (list v1 v2))
+'(#(3 2 1) #(8 7 6))
+racket@> (extract-sub-vectors (sample-sequence 3 5) (list v1 v2))
+'(#(4 3 1) #(1 8 6))
 racket@> 
-racket@> (stich-images "weight-descent-" "descent-" "wd-")
-stich-images: arity mismatch;
- the expected number of arguments does not match the given number
-  expected: 4
-  given: 3
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
-format: ill-formed pattern string
-  explanation: tag `~0` not allowed; arguments were: "wd-"
-  context...:
-   body of top-level
-   stich-images
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
-10
-racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
-10
-racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
-
-0 weight-descent-0.jpg descent-0.jpg wd-0.jpg
-application: not a procedure;
- expected a procedure that can be applied to arguments
-  given: "magick montage -concatenate ~a ~a ~a"
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/private/more-scheme.rkt:75:13: doloop
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
-0 weight-descent-0.jpg descent-0.jpg wd-0.jpg
-application: not a procedure;
- expected a procedure that can be applied to arguments
-  given: "magick montage -concatenate ~a ~a ~a"
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/private/more-scheme.rkt:75:13: doloop
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
-0 weight-descent-0.jpg descent-0.jpg wd-0.jpg
-application: not a procedure;
- expected a procedure that can be applied to arguments
-  given: "magick montage -concatenate ~a ~a ~a"
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/private/more-scheme.rkt:75:13: doloop
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
-0 weight-descent-0.jpg descent-0.jpg wd-0.jpg
-montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
-1 weight-descent-0.jpg descent-0.jpg wd-0.jpg
-montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
-2 weight-descent-1.jpg descent-1.jpg wd-1.jpg
-montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
-3 weight-descent-2.jpg descent-2.jpg wd-2.jpg
-montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
-4 weight-descent-3.jpg descent-3.jpg wd-3.jpg
-montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
-5 weight-descent-4.jpg descent-4.jpg wd-4.jpg
-montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
-6 weight-descent-5.jpg descent-5.jpg wd-5.jpg
-montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
-7 weight-descent-6.jpg descent-6.jpg wd-6.jpg
-montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
-8 weight-descent-7.jpg descent-7.jpg wd-7.jpg
-montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
-9 weight-descent-8.jpg descent-8.jpg wd-8.jpg
-montage: unrecognized option `-concatenate' @ error/montage.c/MontageImageCommand/728.
-'()
-racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
-10
-racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
-10
-racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
-10
-racket@> (stich-images 10 "weight-descent-" "descent-" "wd-")
-0 weight-descent-0.jpg descent-0.jpg wd-0.jpg
-1 weight-descent-0.jpg descent-0.jpg wd-0.jpg
-2 weight-descent-1.jpg descent-1.jpg wd-1.jpg
-3 weight-descent-2.jpg descent-2.jpg wd-2.jpg
-4 weight-descent-3.jpg descent-3.jpg wd-3.jpg
-5 weight-descent-4.jpg descent-4.jpg wd-4.jpg
-6 weight-descent-5.jpg descent-5.jpg wd-5.jpg
-7 weight-descent-6.jpg descent-6.jpg wd-6.jpg
-8 weight-descent-7.jpg descent-7.jpg wd-7.jpg
-9 weight-descent-8.jpg descent-8.jpg wd-8.jpg
-racket@> (make-animation "wd*" 20 "wd.gif")
-WARNING: The convert command is deprecated in IMv7, use "magick" instead of "convert" or "magick convert"
-
-#t
-racket@> (plot-theta-3d line-xs line-ys)
-[image]
 racket@> 
-racket@> (plot-theta-3d line-xs line-ys)
-uv/l2-loss: arity mismatch;
- the expected number of arguments does not match the given number
-  expected: 1
-  given: 2
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (plot-theta-3d line-xs line-ys)
-[image]
-racket@> (plot-theta-3d line-xs line-ys)
-[image]
-racket@> (plot-theta-3d line-xs line-ys)
-lines3d: arity mismatch;
- the expected number of arguments does not match the given number
-  expected: 1 plus optional arguments with keywords #:alpha, #:color, #:label, #:style, #:width, #:x-max, #:x-min, #:y-max, #:y-min, #:z-max, and #:z-min
-  given: 2
-  arguments...:
-   '#(0 0 0)
-   '#(0 0 33.21)
-  context...:
-   body of top-level
-   plot-theta-3d
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (plot-theta-3d line-xs line-ys)
-application: procedure does not accept keyword arguments
-  procedure: list
-  arguments...:
-   (renderer3d (vector (ivl 0 4) (ivl -2 2) (ivl -10 200)) #<procedure:...on/plot-element.rkt:72:0> #<procedure:default-ticks-fun> #f #<procedure:.../plot3d/surface.rkt:19:0>)
-   (renderer3d (vector (ivl 0 0) (ivl 0 0) (ivl 33.21 33.21)) #f #f #f #<procedure:...ot3d/decoration.rkt:35:0>)
-   (renderer3d (vector (ivl 0 0) (ivl 0 0) (ivl 0 33.21)) #f #<procedure:default-ticks-fun> #f #<procedure:...ate/plot3d/line.rkt:17:0>)
-   #:altitude 10
-  context...:
-   /Applications/Racket v8.15/collects/racket/private/kw.rkt:1647:4: body of top-level
-   plot-theta-3d
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (plot-theta-3d line-xs line-ys)
-[image]
-racket@> (plot-theta-3d line-xs line-ys)
-[image]
-racket@> (require plot)
-racket@> (plot3d (list (surface3d (λ (x y) (+ (sqr x) (sqr y))) -1 1 -1 1
-                           #:label "z = x² + y²")
-                (surface3d (λ (x y) (- (+ (sqr x) (sqr y)))) -1 1 -1 1
-                           #:color 4 #:line-color 4
-                           #:label "z = -x² - y²")))
-[image]
-racket@> (plot-theta-3d line-xs line-ys)
-[image]
-racket@> (plot3d (list (surface3d (λ (x y) (+ (sqr x) (sqr y))) -1 1 -1 1
-                           #:label "z = x² + y²")
-                (surface3d (λ (x y) (- (+ (sqr x) (sqr y)))) -1 1 -1 1
-                           #:color 4 #:line-color 4
-                           #:label "z = -x² - y²"))
-                 (surface3d (lambda (x y) (((uv/l2-loss uv/line) line-xs line-ys) (vector x y))) #:color 5 #:line-color 5))
-plot3d: arity mismatch;
- the expected number of arguments does not match the given number
-  expected: 1 plus optional arguments with keywords #:alt, #:altitude, #:angle, #:aspect-ratio, #:az, #:bgcolor, #:fgcolor, #:height, #:legend-anchor, #:lncolor, #:out-file, #:out-kind, #:title, #:width, #:x-label, #:x-max, #:x-min, #:y-label, #:y-max, #:y-min, #:z-label, #:z-max, and #:z-min
-  given: 2
-  arguments...:
-   (list (renderer3d (vector (ivl -1 1) (ivl -1 1) (ivl #f #f)) #<procedure:...on/plot-element.rkt:72:0> #<procedure:default-ticks-fun> #<procedure:.../plot3d/surface.rkt:75:28> #<procedure:.../plot3d/surface.rkt:19:0>) (renderer3d (vector (ivl -1 1) (ivl ...
-   (renderer3d (vector (ivl #f #f) (ivl #f #f) (ivl #f #f)) #<procedure:...on/plot-element.rkt:72:0> #<procedure:default-ticks-fun> #f #<procedure:.../plot3d/surface.rkt:19:0>)
-  context...:
-   body of top-level
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (plot3d (list (surface3d (λ (x y) (+ (sqr x) (sqr y))) -1 1 -1 1
-                           #:label "z = x² + y²")
-                (surface3d (λ (x y) (- (+ (sqr x) (sqr y)))) -1 1 -1 1
-                           #:color 4 #:line-color 4
-                           #:label "z = -x² - y²")
-                 (surface3d (lambda (x y) (((uv/l2-loss uv/line) line-xs line-ys) (vector x y))) #:color 5 #:line-color 5)))
-[image]
-racket@> (plot-theta-3d line-xs line-ys)
-[image]
-racket@> (plot-theta-3d line-xs line-ys)
-[image]
-racket@> (plot-theta-3d line-xs line-ys)
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(0 0))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-application: not a procedure;
- expected a procedure that can be applied to arguments
-  given: 0
-  context...:
-   body of top-level
-   plot-theta-3d
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-application: not a procedure;
- expected a procedure that can be applied to arguments
-  given: 0
-  context...:
-   body of top-level
-   plot-theta-3d
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-application: not a procedure;
- expected a procedure that can be applied to arguments
-  given: 0
-  context...:
-   body of top-level
-   plot-theta-3d
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-application: not a procedure;
- expected a procedure that can be applied to arguments
-  given: 0
-  context...:
-   body of top-level
-   plot-theta-3d
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-lines3d: contract violation
-  expected: real?
-  given: '#(1 1 100)
-  in: an element of
-      a part of the or/c of
-      an element of
-      a part of the or/c of
-      the 1st argument of
-      (->*
-       ((or/c
-         natural?
-         (sequence/c
-          (or/c natural? (sequence/c real?)))))
-       (#:alpha
-        (and/c real? nonnegative?)
-        #:color
-        (or/c
-         string?
-         symbol?
-         (and/c
-          exact-integer?
-          negative?
-          (not/c fixnum?))
-         (and/c
-          exact-integer?
-          positive?
-          (not/c fixnum?))
-         (and/c fixnum? negative?)
-         (and/c fixnum? positive? (not/c index?))
-         (and/c index? positive? (not/c byte?))
-         g134
-         1
-         0
-         (recursive-contract g161 #:impersonator)
-         (list/c real? real? real?))
-        #:label
-        (or/c string? #f pict?)
-        #:style
-        (or/c
-         (and/c
-          exact-integer?
-          negative?
-          (not/c fixnum?))
-         (and/c
-          exact-integer?
-          positive?
-          (not/c fixnum?))
-         (and/c fixnum? negative?)
-         (and/c fixnum? positive? (not/c index?))
-         (and/c index? positive? (not/c byte?))
-         g134
-         1
-         0
-         'transparent
-         'solid
-         'dot
-         'long-dash
-         'short-dash
-         'dot-dash)
-        #:width
-        (and/c real? nonnegative?)
-        #:x-max
-        (or/c real? #f)
-        #:x-min
-        (or/c real? #f)
-        #:y-max
-        (or/c real? #f)
-        #:y-min
-        (or/c real? #f)
-        #:z-max
-        (or/c real? #f)
-        #:z-min
-        (or/c real? #f))
-       any)
-  contract from: 
-      <pkgs>/plot-lib/plot/private/plot3d/line.rkt
-  blaming: top-level
-   (assuming the contract is correct)
-  at: <pkgs>/plot-lib/plot/private/plot3d/line.rkt:60:9
-  context...:
-   /Applications/Racket v8.15/collects/racket/contract/private/blame.rkt:350:0: raise-blame-error
-   /Applications/Racket v8.15/share/pkgs/plot-lib/plot/private/common/utils.rkt:21:0: body of top-level
-   .../private/map.rkt:40:19: loop
-   [repeats 1 more time]
-   /Applications/Racket v8.15/share/pkgs/plot-lib/plot/private/plot3d/line.rkt:60:0: lines3d
-   plot-theta-3d
-   /Applications/Racket v8.15/collects/racket/repl.rkt:11:26
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d line-xs line-ys #(1 1))
-[image]
-racket@> (plot-theta-3d-file line-xs line-ys #(1 1) "tmp.jpg")

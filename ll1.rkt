@@ -1,3 +1,5 @@
+#lang racket
+
 (require "uv/calculus.rkt")
 (require "uv/plot.rkt")
 (require "uv/optimization.rkt")
@@ -136,6 +138,12 @@
 
 ;; t0 = t0 - learning-rate * rate-of-change
 
+(define padding 4)
+
+(define zero-pad
+  (lambda (n)
+    (left-pad n 0 padding)))
+
 (define line-loss-theta-0
   (lambda (theta-1)
     (lambda (xs ys)
@@ -150,15 +158,17 @@
 (define render-step-fun
   (lambda (xs ys file-prefix (sample-step 1))
     (lambda (i theta)
-      (let ((fname (format "~a~a.jpg" file-prefix i)))
+      (let ((fname (format "~a~a.jpg" file-prefix (left-pad i 0 padding)))
         (begin;;when (= (remainder i sample-step) 0)
           (line-scatter-plot-file
            xs ys theta 'blue 'red fname (format "~a" theta))
           (plot-loss-weight-file xs ys
                                  (vector-ref theta 0)
-                                 (format "loss-~a~a.jpg" file-prefix i))
+                                 (format "loss-~a~a.jpg" file-prefix
+                                         (left-pad i 0 padding)))
           (plot-loss-3d-file xs ys theta
-                             (format "loss-3d-~a~a.jpg" file-prefix i)))))))
+                             (format "loss-3d-~a~a.jpg" file-prefix
+                                     (left-pad i 0 padding)))))))))
 
 (define grad-descent-and-plot-line
   (lambda (xs ys descent-steps
@@ -214,7 +224,7 @@
                       in-1 in-2 in-3 out))))))
 ;;
 
-(define-syntax-rule (declare-hype x)
+(define-syntax-rule (declare-hyper x)
   (define x null))
 
 ;; like let macro

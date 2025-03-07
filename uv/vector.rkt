@@ -14,7 +14,8 @@
          vmax
          to-vector
          norm
-         normalize)
+         normalize
+         vector-append!)
 
 (define to-vector
   (lambda (x)
@@ -104,3 +105,8 @@
     (if (scalar? xs)
         (sqrt (sqr xs))
         (sqrt (vsum (vector-map sqr xs))))))
+
+(define vector-append!
+  (lambda (v e)
+    (let ((v (vector-append v (vector e))))
+      v)))

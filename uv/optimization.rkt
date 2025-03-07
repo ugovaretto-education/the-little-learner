@@ -4,7 +4,11 @@
          uv/grad-descent
          uv/line-loss
          uv/grad-descent-line
-         uv/grad-descent-line-log)
+         uv/grad-descent-line-log
+         uv/l2-loss
+         uv/l2-loss-sample
+         uv/loss-line
+         uv/loss-line-m)
 
 (require "calculus.rkt")
 (require "vector.rkt")
@@ -39,8 +43,7 @@
     (do ((i 0 (+ i 1))
          (np p (f np)))
         ((= i revisions) np) ;;(<= (- (norm (f np)) (norm np)) rev-eps))
-      (begin
-        (log i np)))))
+      (log i np))))
 
 (define uv/grad-descent-line-log
   (lambda (f revisions p a log)
@@ -50,3 +53,35 @@
        revisions
        p
        log)))
+
+(define uv/l2-loss
+  (lambda (target-fun)
+    (lambda (xs ys)
+      (lambda (params)
+        (let ((pred-ys ((target-fun xs) params)))
+          (vsum
+           (uv/sqr
+            (v- pred-ys ys))))))))
+
+(define uv/l2-loss-sample
+  (lambda (target-fun)
+    (lambda (xs ys)
+      (lambda (params)
+        (lambda (num-samples)
+          (let* ((idx (sample-sequence num-samples (vector-length xs)))
+                 (xs-ys (extract-sub-vectors idx (list xs ys)))
+                 (xs (car xs-ys))
+                 (ys (cadr xs-ys)))
+            (((uv/l2-loss target-fun) xs ys) params)))))))
+[]
+
+(define uv/loss-line
+  (lambda (xs ys)
+    (lambda (theta)
+    (((uv/l2-loss uv/line) xs ys) theta))))
+
+
+(define uv/loss-line-m ;; y = mx + q, q = 0
+  (lambda (xs ys)
+    (lambda (m)
+           ((uv/loss-line xs ys) (list m 0)))))
