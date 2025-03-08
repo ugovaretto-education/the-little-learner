@@ -3,16 +3,42 @@
 (provide uv/revise
          uv/grad-descent
          uv/line-loss
+         uv/grad-descent-adaptive
          uv/grad-descent-line
          uv/grad-descent-line-log
          uv/l2-loss
          uv/l2-loss-sample
          uv/loss-line
-         uv/loss-line-m)
+         uv/loss-line-m
+         declare-hyper
+         hyper-param
+         hyper-param-set!)
 
 (require "calculus.rkt")
 (require "vector.rkt")
 (require "utility.rkt")
+
+(define hyper-parameters
+  (make-hash
+   (list
+    '(revisions . 1000)
+    '(bucket-size . 100)
+    '(learning-rate . 0.01)
+    '(adaptive-learning-rate . 0.1)
+    '(learning-rate-rate . 1))))
+
+(define-syntax-rule (hyper-param k)
+    (hash-ref hyper-parameters (quote k)))
+
+(define-syntax-rule (hyper-param-set! k v)
+    (hash-set! hyper-parameters (quote k) v))
+
+(define-syntax declare-hyper
+  (syntax-rules ()
+    ((declare-hyper k)
+     (hyper-param-set! (quote k) null))
+    ((declare-hyper k v)
+     (hyper-param-set! (quote k) v))))
 
 (define rev-eps 1e-8)
 
@@ -26,9 +52,29 @@
   (lambda (f revisions p a)
     (uv/revise
      (lambda (v)
-       (v- v (v* a ((uv/gradient f) (to-vector v)))))
+       (v- (to-vector v) (v* a ((uv/gradient f) (to-vector v)))))
        revisions
        p)))
+
+;; update the learning rate by an amount proportional to the speed of change
+;; of the parameter vector (e.g. theta for a line)
+;; the speed is the difference in values of the previous vector and the updated one
+;; and the difference between learning rates i.e. the derivative at the current learning rate point.
+(define uv/grad-descent-adaptive
+  (lambda (f revisions pa u) ;; pa includes both the theta parameter and the learning-rate
+    (uv/revise
+     (lambda (pa)
+       ((let* ((v (car pa)) ;; loss function parameters (e.g. theta for line)
+               (a (cadr pa)) ;; learning rate
+               (g (lambda (x) ;; updated loss function parameters
+                    (v- (to-vector v) (v* x ((uv/gradient f) (to-vector v))))))
+               (loss-gradient (g v))
+               (ll (lambda (x) (norm (v- v (g x)))))) ;; difference between previous vector and updated one
+          (list
+           loss-gradient
+           (- a (* u ((uv/gradient ll) (to-vector a)))))
+          revisions
+          pa))))))
 
 (define uv/line-loss
   (lambda (xs ys)
@@ -38,6 +84,10 @@
 (define uv/grad-descent-line
   (lambda (xs ys revisions p a)
     (uv/grad-descent (uv/line-loss xs ys) revisions p a)))
+
+(define uv/grad-descent-line-adaptive
+  (lambda (xs ys revisions pa u)
+    (uv/grad-descent-adaptive (uv/line-loss xs ys) revisions pa u)))
 
 (define uv/revise-log
   (lambda (f revisions p (log (lambda (_ __) (null))))

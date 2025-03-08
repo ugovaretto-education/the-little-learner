@@ -47,7 +47,7 @@
 
 (define uv/gradient
   (lambda (f)
-    (lambda (xs)
+    (lambda (xs) ;; xs must be a vector
       (do ((i 0 (+ i 1))
            (dx (* 2 epsilon))
            (gs (make-vector (vector-length xs)))

@@ -168,7 +168,7 @@
                                          (left-pad i 0 padding)))
           (plot-loss-3d-file xs ys theta
                              (format "loss-3d-~a~a.jpg" file-prefix
-                                     (left-pad i 0 padding)))))))))
+                                     (left-pad i 0 padding))))))))
 
 (define grad-descent-and-plot-line
   (lambda (xs ys descent-steps
