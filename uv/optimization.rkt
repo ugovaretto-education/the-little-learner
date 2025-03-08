@@ -12,6 +12,7 @@
 
 (require "calculus.rkt")
 (require "vector.rkt")
+(require "utility.rkt")
 
 (define rev-eps 1e-8)
 
@@ -68,12 +69,11 @@
     (lambda (xs ys)
       (lambda (params)
         (lambda (num-samples)
-          (let* ((idx (sample-sequence num-samples (vector-length xs)))
-                 (xs-ys (extract-sub-vectors idx (list xs ys)))
+          (let* (;;(idx (sample-sequence num-samples (vector-length xs)))
+                 (xs-ys (sample-vectors num-samples (list xs ys)));;xs-ys (extract-sub-vectors idx (list xs ys)))
                  (xs (car xs-ys))
                  (ys (cadr xs-ys)))
             (((uv/l2-loss target-fun) xs ys) params)))))))
-[]
 
 (define uv/loss-line
   (lambda (xs ys)

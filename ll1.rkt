@@ -158,7 +158,7 @@
 (define render-step-fun
   (lambda (xs ys file-prefix (sample-step 1))
     (lambda (i theta)
-      (let ((fname (format "~a~a.jpg" file-prefix (left-pad i 0 padding)))
+      (let ((fname (format "~a~a.jpg" file-prefix (left-pad i 0 padding))))
         (begin;;when (= (remainder i sample-step) 0)
           (line-scatter-plot-file
            xs ys theta 'blue 'red fname (format "~a" theta))

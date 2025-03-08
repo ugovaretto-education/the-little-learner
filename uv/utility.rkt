@@ -69,4 +69,4 @@
 (define sample-vectors
   (lambda (num-samples xs)
     (let ((idx (sample-sequence num-samples (vector-length (car xs)))))
-      (extract-sub-vectors idx )))
+      (extract-sub-vectors idx ))))
