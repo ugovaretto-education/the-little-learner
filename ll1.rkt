@@ -3,6 +3,7 @@
 (require "uv/calculus.rkt")
 (require "uv/plot.rkt")
 (require "uv/optimization.rkt")
+(require "uv/utility.rkt")
 (require plot)
 
 ;; Points
@@ -142,18 +143,18 @@
 
 (define zero-pad
   (lambda (n)
-    (left-pad n 0 padding)))
+    (zero-pad n 0 padding)))
 
 (define line-loss-theta-0
   (lambda (theta-1)
     (lambda (xs ys)
       (lambda (x)
-        (((uv-l2-loss line) xs ys (list x theta-1)))))))
+        (((uv/l2-loss line) xs ys (list x theta-1)))))))
 
 (define line-loss-theta
   (lambda (xs ys theta1)
     (lambda(x)
-      (((uv-l2-loss line) xs ys) (list x theta1)))))
+      (((uv/l2-loss line) xs ys) (list x theta1)))))
 
 (define render-step-fun
   (lambda (xs ys file-prefix (sample-step 1))
@@ -222,18 +223,19 @@
         ;;(displayln (format "~a ~a ~a ~a" i in-1 in-2 out))
         (system (format "magick convert +append ~a ~a ~a ~a"
                       in-1 in-2 in-3 out))))))
-;;
 
-(define-syntax-rule (declare-hyper x)
-  (define x null))
 
-;; like let macro
-(define-syntax with-hyper
-  (syntax-rules ()
-    ((with-hyper ((var val) ...) body ...)
-     (begin
-       (set! var val) ...
-       body ...))))
+(define smooth ;; decay-rate * average + (1 - decay-rate) * gradient, average = historical average
+  (lambda (decay-rate average g)
+    (+ (* decay-rate average))))
+
+(define gen-points
+  (lambda(n m M)
+    (let ((xs (build-vector n (lambda (i) i)))
+          (ys (build-vector n (lambda (i)
+                                (+ m (random (- M m)))))))
+      (vector-map vector xs ys))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -248,3 +250,4 @@
       ((lambda () body ...)))
     ((let* ((var val) rest ...) body ...) ; binding case
       ((lambda (var) (let* (rest ...) body ...)) val))))
+

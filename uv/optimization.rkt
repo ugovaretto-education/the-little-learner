@@ -25,7 +25,7 @@
     '(bucket-size . 100)
     '(learning-rate . 0.01)
     '(adaptive-learning-rate . 0.1)
-    '(learning-rate-rate . 1))))
+    '(meta-learning-rate . 1))))
 
 (define-syntax-rule (hyper-param k)
     (hash-ref hyper-parameters (quote k)))
