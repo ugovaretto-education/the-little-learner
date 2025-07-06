@@ -19,7 +19,7 @@
 ;; `color`: The color of the points.
 ;; The plot boundaries are automatically determined with a small margin.
 (define scatter-plot
-  (lambda (xs ys color)
+  (lambda (xs ys (color 'red))
     (let
         (
          (xm (- (vmin xs) 0.1))
@@ -42,7 +42,7 @@
 ;; `theta`: A list or vector containing the slope (m) and intercept (c) of the line.
 ;; `color`: The color of the line.
 (define line-plot
-  (lambda (xs theta color)
+  (lambda (xs theta (color 'red))
     (let ((xmin (- (vmin xs) 0.1))
           (xmax (+ (vmax xs) 0.1)))
       (plot (function
@@ -60,7 +60,7 @@
 ;; `label`: An optional label for the line.
 ;; `filename`: An optional filename to save the plot. If empty, displays the plot.
 (define line-scatter-plot
-  (lambda (xs ys theta color-p color-l (label "") (filename ""))
+  (lambda (xs ys theta color-p color-l (label "") (filename #f))
     (let ((xm (- (vmin xs) 0.1))
           (xM (+ (vmax xs) 0.1))
           (ym (- (vmin ys) 0.1))

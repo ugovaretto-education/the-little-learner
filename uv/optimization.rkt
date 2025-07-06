@@ -2,7 +2,6 @@
 
 ;;; This module provides functions for optimization, including various
 ;;; implementations of gradient descent. It also includes utilities for
-
 ;;; managing hyperparameters.
 
 (provide uv/revise
