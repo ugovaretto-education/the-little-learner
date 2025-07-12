@@ -37,8 +37,8 @@
 ;;; LOSS FUNCTION EVALUATION
 ;;; Demonstrate how loss changes with different parameter values
 ;;; uv/loss-line creates a loss function for linear regression using L2 loss
-(define loss-theta-0 ((uv/loss-line line-xs line-ys) '(0 0)))     ; Loss at theta-0
-(define loss-theta-1 ((uv/loss-line line-xs line-ys) '(0.009 0))) ; Loss at theta-1
+(define loss-theta-0 ((uv/loss-line line-xs expected-ys) '(0 0)))     ; Loss at theta-0
+(define loss-theta-1 ((uv/loss-line line-xs expected-ys) '(0.009 0))) ; Loss at theta-1
 
 ;;; Calculate the difference in loss between the two parameter sets
 ;;; This demonstrates how small changes in parameters affect the loss
@@ -83,8 +83,8 @@
   (lambda (xs ys ws)
     (let
       ((w (map ((uv/l2-loss uv/line) xs ys) ws))  ; Calculate loss for each weight set
-       (x (map car ws)))                          ; Extract first parameter (slope)
-      (list->vector (map vector x w)))))          ; Create vector of (slope, loss) pairs
+       (xs (map car ws)))                          ; Extract first parameter (slope)
+      (list->vector (map vector xs w)))))          ; Create vector of (slope, loss) pairs
 
 ;;; Sample weight combinations to evaluate
 ;;; Each pair represents (slope, intercept) parameters for the line
