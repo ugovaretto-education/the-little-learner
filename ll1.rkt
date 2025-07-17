@@ -63,7 +63,7 @@
 (define plot-theta-0-fun
   (lambda (xs ys color)
     (lambda()
-      '(function (uv/loss-line-m xs ys) 0 4
+       (function (uv/loss-line-m xs ys) 0 4
                     #:samples 50
                     #:y-min -10
                     #:y-max 200
@@ -73,7 +73,7 @@
 (define plot-points-fun
   (lambda (xs ys color)
     (lambda()
-      '(points
+       (points
        (vector-map vector xs ys)  ; Convert x,y vectors to list of point vectors
        #:color color))))
 
